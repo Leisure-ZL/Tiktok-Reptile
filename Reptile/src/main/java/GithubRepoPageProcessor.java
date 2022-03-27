@@ -3,21 +3,44 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.JsonPathSelector;
+import util.UrlFileDownloadUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GithubRepoPageProcessor implements PageProcessor {
+
+    static final String regex = "https://www.iesdouyin.com/share/video/\\w+";
+   // static final String regex = "https://www.iesdouyin.com/share/video/7079674752108907812";
+
+    static String json;
+    List<String> list = new ArrayList<>();
 
     // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
 
     @Override
     public void process(Page page) {
-        // 部分二：定义如何抽取页面信息，并保存下来
-      //  page.putField("author", page.getUrl().regex("http://cis.swu.edu.cn/info/1039/*.htm").toString());
-        page.putField("name", page.getHtml().xpath("/html/body/div/div[3]/div/div/div[2]/form/div[1]").toString());
+      //  page.putField("video", page.getHtml().xpath("/html").toString());
+      //  page.putField("video", page.getJson().all().toString());
 
+
+        json = page.getJson().all().toString();
+        //能够获取到多个url
+        JsonPathSelector jsonPathSelector = new JsonPathSelector("$..extra_list[*].link");
+       // System.out.println("获取到的JSON数据中code的属性值：\n" + jsonPathSelector.select(json));
+        list = jsonPathSelector.selectList(json);
+
+        for(String s : list){
+            System.out.println(s);
+
+        }
+        page.addTargetRequests(list);
         // 部分三：从页面发现后续的url地址来抓取
-        page.addTargetRequests(page.getHtml().links().regex("http://cis.swu.edu.cn/info/\\w+/\\w+.htm").all());
+       // page.addTargetRequests(page.getHtml().links().regex(regex).all());
     }
 
     @Override
@@ -28,8 +51,15 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new GithubRepoPageProcessor())
-                .addUrl("http://cis.swu.edu.cn/")
-             //   .addPipeline(new JsonFilePipeline("C:\\Users\\86182\\Desktop"))
+                .addUrl("https://creator.douyin.com/aweme/v1/creator/data/billboard/?billboard_type=1")
                 .thread(5).run();
+
+
+     //  System.out.println(json);
+
+        // 构造函数中的参数jsonPathStr为匹配规则
+      //  JsonPathSelector jsonPathSelector = new JsonPathSelector("$..extra_list[*].link");
+      //  System.out.println("获取到的JSON数据中code的属性值：\n" + jsonPathSelector.select(json));
+
     }
 }

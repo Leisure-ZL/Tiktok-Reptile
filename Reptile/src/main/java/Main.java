@@ -1,8 +1,5 @@
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.downloader.selenium.SeleniumDownloader;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
-
-import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -17,14 +14,11 @@ public class Main {
                 .addUrl(adUrl)
                 .thread(1).run();
 
-
         Spider.create(new VideoPageProcessor())
                 .setDownloader(new SeleniumDownloader("doc/util/chromedriver.exe"))
                 .addUrl(urlList.get(0))
-                //.addPipeline(new JsonFilePipeline("C:\\Users\\86182\\Desktop\\Reptile\\data"))
                 .addPipeline(new DBPipeline())
                 .thread(1).run();
     }
-
 
 }

@@ -2,7 +2,8 @@ package bean;
 
 public class User {
 
-    //抖音Id
+    //Id
+    private int id;
     //博主昵称
     private String nickname;
     //粉丝数
@@ -11,6 +12,14 @@ public class User {
     private String total_favorited;
     //主页链接
     private String user_link;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNickname() {
         return nickname;

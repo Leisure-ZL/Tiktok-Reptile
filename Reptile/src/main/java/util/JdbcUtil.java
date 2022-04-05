@@ -10,7 +10,7 @@ public class JdbcUtil {
             //1.注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             //2.获取连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/reptile", "root", "ZLzhouliang0.");
+            conn = DriverManager.getConnection(Ignore.jdbcUrl,Ignore.jdbcUser ,Ignore.jdbcPass );
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

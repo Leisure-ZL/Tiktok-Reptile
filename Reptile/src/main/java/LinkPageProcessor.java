@@ -3,7 +3,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.JsonPathSelector;
 
-
 public class LinkPageProcessor implements PageProcessor {
 
     static final String regex = "https://www.iesdouyin.com/share/video/\\w+";
@@ -28,7 +27,6 @@ public class LinkPageProcessor implements PageProcessor {
             for(String s : Main.urlList){
                 System.out.println(s);
             }
-
         }else{
             System.out.println("***" + page.getUrl());
         }

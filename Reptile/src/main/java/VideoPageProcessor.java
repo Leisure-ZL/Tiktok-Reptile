@@ -13,10 +13,9 @@ public class VideoPageProcessor implements PageProcessor {
     static final String regex = "https://www.iesdouyin.com/share/video/\\w+";
    // static final String regex = "https://www.iesdouyin.com/share/video/7079674752108907812";
 
-    static String json;
     List<String> list = new ArrayList<>();
 
-    // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
+    //抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
 
 
@@ -60,7 +59,11 @@ public class VideoPageProcessor implements PageProcessor {
             page.putField("video",video);
         }
 
-        // 部分三：从页面发现后续的url地址来抓取
+        //从页面发现后续的url地址来抓取(右侧主页视频和推荐视频)
+        page.addTargetRequests(page.getHtml().links().regex("//www.douyin.com/video/\\w+").all());
+
+
+        //添加入口urlList（前面获取到的url列表）
         page.addTargetRequests(list);
     }
 
@@ -68,7 +71,6 @@ public class VideoPageProcessor implements PageProcessor {
     public Site getSite() {
         return site;
     }
-
 
 
 }

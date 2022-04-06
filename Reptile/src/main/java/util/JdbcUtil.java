@@ -1,16 +1,28 @@
 package util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class JdbcUtil {
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws IOException {
         Connection conn = null;
+        Properties properties=new Properties();//创建文件对象
+        InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties");
+        properties.load(file);
+        String driver = properties.getProperty("DRIVER");
+        String url = properties.getProperty("URL");
+        String uname = properties.getProperty("USERNAME");
+        String passwd = properties.getProperty("PASSWORD");
         try {
             //1.注册驱动
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
             //2.获取连接
-            conn = DriverManager.getConnection(Ignore.jdbcUrl,Ignore.jdbcUser ,Ignore.jdbcPass );
+            conn = DriverManager.getConnection(url,uname ,passwd );
+          //  conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/reptile",uname ,passwd );
+
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -1,1 +1,2 @@
-Ignore.*
+*.properties
+target/

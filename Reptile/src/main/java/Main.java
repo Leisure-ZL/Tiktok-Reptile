@@ -18,7 +18,7 @@ public class Main {
                 .setDownloader(new SeleniumDownloader("doc/util/chromedriver.exe"))
                 .addUrl(urlList.get(0))
                 .addPipeline(new DBPipeline())
-                .thread(1).run();
+                .thread(3).run();
     }
 
 }

@@ -15,21 +15,14 @@ public class LinkPageProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
-        if(page.getUrl().regex("https://creator.douyin.com/aweme/v1/creator/data/billboard/\\?billboard_type=\\d+").match()){
+        json = page.getJson().all().toString();
 
-            json = page.getJson().all().toString();
+        //能够获取到多个url
+        JsonPathSelector jsonPathSelector = new JsonPathSelector("$..extra_list[*].link");
 
-            //能够获取到多个url
-            JsonPathSelector jsonPathSelector = new JsonPathSelector("$..extra_list[*].link");
+        Main.urlList = jsonPathSelector.selectList(json);
 
-            Main.urlList = jsonPathSelector.selectList(json);
-
-            for(String s : Main.urlList){
-                System.out.println(s);
-            }
-        }else{
-            System.out.println("***" + page.getUrl());
-        }
+        System.out.println("list size:" + Main.urlList.size());
 
     }
 

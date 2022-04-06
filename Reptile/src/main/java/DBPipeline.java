@@ -7,6 +7,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import util.JdbcUtil;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -19,13 +20,12 @@ public class DBPipeline implements Pipeline {
         UserDao userDao = new UserDao();
         VideoDao videoDao = new VideoDao();
 
-        Connection connection = JdbcUtil.getConnection();
 
         try {
+            Connection connection = JdbcUtil.getConnection();
             userDao.add(connection,user);
             videoDao.add(connection,video);
-
-        } catch (SQLException throwables) {
+        } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
         }
 

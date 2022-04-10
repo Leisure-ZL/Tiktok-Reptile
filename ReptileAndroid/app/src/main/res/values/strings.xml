@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Reptile-Android</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_main">主页</string>
+    <string name="title_user">用户</string>
+    <string name="title_video">视频</string>
+    <string name="title_my">个人</string>
+</resources>

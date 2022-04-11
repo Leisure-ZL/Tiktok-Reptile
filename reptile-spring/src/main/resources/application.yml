@@ -1,7 +1,0 @@
-#数据源连接信息
-spring:
-  datasource:
-    username: root
-    password: ZLzhouliang0.
-    url: jdbc:mysql://127.0.0.1:3306/Reptile
-    driver-class-name: com.mysql.cj.jdbc.Driver

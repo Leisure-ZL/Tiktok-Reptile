@@ -1,4 +1,8 @@
-#数据源连接信息
+#锟斤拷锟斤拷源锟斤拷锟斤拷锟斤拷息
+server:
+  port: 8080
+  address: 192.168.0.1
+
 spring:
   datasource:
     username: root

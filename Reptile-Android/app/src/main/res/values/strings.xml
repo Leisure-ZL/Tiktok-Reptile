@@ -9,4 +9,6 @@
     <string name="account">账号</string>
     <string name="password">密码</string>
     <string name="login">登 录</string>
+    <string name="wechat">微信授权</string>
+    <string name="login_phone">手机验证登录</string>
 </resources>

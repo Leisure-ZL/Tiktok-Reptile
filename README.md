@@ -194,3 +194,6 @@ Linux服务器上无法运行chrom浏览器，尝试使用firefox--------失败
 BottomNavigationView + Viewpager2搭建页面框架
 
 学习Android MVVM框架
+
+构建大致的MVVM框架
+

@@ -1,4 +1,4 @@
-package cn.edu.swu.zl.reptilespring.entity;
+package cn.edu.swu.zl.reptilespring.base;
 
 public class BaseResponse<T> {
 

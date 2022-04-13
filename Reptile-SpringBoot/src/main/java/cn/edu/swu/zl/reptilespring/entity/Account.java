@@ -5,6 +5,24 @@ public class Account {
     private int id;
     private String username;
     private String password;
+    private String nickname = "默认用户";
+    private String headImg = "xxxxx";
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
 
     public int getId() {
         return id;
@@ -28,5 +46,16 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", headImg='" + headImg + '\'' +
+                '}';
     }
 }

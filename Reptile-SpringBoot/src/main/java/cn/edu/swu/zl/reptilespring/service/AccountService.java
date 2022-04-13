@@ -8,7 +8,11 @@ import java.util.List;
 public interface AccountService {
 
     //验证登录
-    public boolean check(String username, String pass);
+    Account login(String username, String pass);
+
+    //注册账户
+    boolean register(Account account);
+
 
 
 }

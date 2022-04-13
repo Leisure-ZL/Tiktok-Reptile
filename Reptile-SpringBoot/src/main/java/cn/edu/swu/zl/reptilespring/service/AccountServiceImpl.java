@@ -20,9 +20,24 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public boolean check(String username, String pass) {
+    public Account login(String username, String pass) {
 
-        return accountDao.checkAccount(username, pass);
+        if(accountDao.checkUsername(username)){
+            return accountDao.checkAccount(username, pass);
+        }else{
+            Account account = new Account();
+            account.setUsername(username);
+            account.setPassword(pass);
+            register(account);  //先注册
+            account = accountDao.checkAccount(username, pass);  //再查询一次
+            return account;
+        }
+    }
+
+    @Override
+    public boolean register(Account account) {
+
+        return accountDao.registerAccount(account);
 
     }
 

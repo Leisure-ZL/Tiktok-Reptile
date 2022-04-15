@@ -1,6 +1,5 @@
 package cn.edu.swu.zl.reptilespring.dao;
 
-import cn.edu.swu.zl.reptilespring.entity.User;
 import cn.edu.swu.zl.reptilespring.entity.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

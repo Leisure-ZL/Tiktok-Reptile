@@ -1,15 +1,12 @@
 package cn.edu.swu.zl.reptilespring.dao;
 
 import cn.edu.swu.zl.reptilespring.entity.Account;
-import cn.edu.swu.zl.reptilespring.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 
-import java.util.List;
 import java.util.Map;
 
 @Repository

@@ -3,17 +3,16 @@ package cn.edu.swu.zl.reptilespring.controller;
 import cn.edu.swu.zl.reptilespring.base.BaseRequest;
 import cn.edu.swu.zl.reptilespring.entity.Account;
 import cn.edu.swu.zl.reptilespring.base.BaseResponse;
-import cn.edu.swu.zl.reptilespring.entity.User;
+import cn.edu.swu.zl.reptilespring.entity.UserRaw;
 import cn.edu.swu.zl.reptilespring.service.AccountService;
+import cn.edu.swu.zl.reptilespring.service.AlarmTask;
 import cn.edu.swu.zl.reptilespring.service.UserService;
 import cn.edu.swu.zl.reptilespring.util.EncryptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +29,10 @@ public class Hello {
 
     @ResponseBody
     @RequestMapping("/hello")
-    public List<User> hello() {
+    public List<UserRaw> hello() {
+
+        AlarmTask.getUser("https://www.douyin.com/user/MS4wLjABAAAA8U_l6rBzmy7bcy6xOJel4v0RzoR_wfAubGPeJimN__4");
+
         return userService.getUserRankByFollower();
     }
 

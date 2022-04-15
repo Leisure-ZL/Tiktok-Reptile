@@ -1,8 +1,6 @@
 package cn.edu.swu.zl.reptilespring.service;
 
-import cn.edu.swu.zl.reptilespring.dao.UserDao;
 import cn.edu.swu.zl.reptilespring.dao.VideoDao;
-import cn.edu.swu.zl.reptilespring.entity.User;
 import cn.edu.swu.zl.reptilespring.entity.Video;
 import cn.edu.swu.zl.reptilespring.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;

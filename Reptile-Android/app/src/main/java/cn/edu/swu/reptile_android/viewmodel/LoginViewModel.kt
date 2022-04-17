@@ -18,7 +18,7 @@ class LoginViewModel() : ViewModel() {
 
     val loginInfo: MutableLiveData<BaseResponse<Account>> = MutableLiveData()
 
-    private val accountRepo = AccountRepository();
+    private val accountRepo = AccountRepository()
 
     fun login() {
 

@@ -26,6 +26,7 @@ public class VideoPageProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
+
         //保存博主信息
         User user = new User();
         String nickname = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div/div[1]/div[2]/a/div/span/span/span/span/span/text()").toString();
@@ -35,9 +36,9 @@ public class VideoPageProcessor implements PageProcessor {
 
         if(nickname != null){
             user.setNickname(nickname);
-            user.setFollower_count(follower_count);
-            user.setTotal_favorited(total_favorited);
-            user.setUser_link(user_link);
+            user.setFollowerCount(follower_count);
+            user.setLikeCount(total_favorited);
+            user.setLink(user_link);
             page.putField("user",user);
         }
 
@@ -47,15 +48,15 @@ public class VideoPageProcessor implements PageProcessor {
         String like_num = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span/text()").toString();
         String comment_num = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[2]/span/text()").toString();
         String collect_num = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[3]/span/text()").toString();
-        String url = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[2]/div/div[1]/div/div[2]/div[2]/xg-video-container/video/source[1]/@src").toString();
-
+        String videoUrl = page.getHtml().xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[2]/div/div[1]/div/div[2]/div[2]/xg-video-container/video/source[3]/@src").toString();
         if(video_name != null){
-            video.setVideo_name(video_name);
-            video.setLike_num(like_num);
-            video.setComment_num(comment_num);
-            video.setCollect_num(collect_num);
-            video.setUrl(url);
-            video.setUser_name(user.getNickname());
+            video.setVideoName(video_name);
+            video.setLikeNum(like_num);
+            video.setCommentNum(comment_num);
+            video.setCollectNum(collect_num);
+            video.setVideoUrl(videoUrl);
+            video.setUrl(page.getUrl().toString());
+            video.setUserName(user.getNickname());
             page.putField("video",video);
         }
 

@@ -13,8 +13,10 @@ public interface UserService {
     //获取用户粉丝数排名(从大到小)
     public List<UserRaw> getUserRankByFollower();
 
-    //获取用户粉丝增量排名 （每天更新）
+    //获取用户粉丝增量排名 （前5）
     List<User> getUserRankByIncremental();
+
+
 
 
 }

@@ -1,16 +1,18 @@
 package cn.edu.swu.zl.reptilespring.service;
 
-import cn.edu.swu.zl.reptilespring.entity.Video;
+import cn.edu.swu.zl.reptilespring.entity.VideoRaw;
 
 import java.util.List;
 
 public interface VideoService {
 
-    public List<Video> getVideoRankByLike();
+    List<VideoRaw> getAll();
 
-    public List<Video> getVideoRankByComment();
+    List<VideoRaw> getVideoRankByLike();
 
-    public List<Video> getVideoRankByCollect();
+    List<VideoRaw> getVideoRankByComment();
+
+    List<VideoRaw> getVideoRankByCollect();
 
 
 }

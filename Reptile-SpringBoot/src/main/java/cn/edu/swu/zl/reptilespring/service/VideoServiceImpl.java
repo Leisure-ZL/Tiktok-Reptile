@@ -1,7 +1,7 @@
 package cn.edu.swu.zl.reptilespring.service;
 
 import cn.edu.swu.zl.reptilespring.dao.VideoDao;
-import cn.edu.swu.zl.reptilespring.entity.Video;
+import cn.edu.swu.zl.reptilespring.entity.VideoRaw;
 import cn.edu.swu.zl.reptilespring.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,19 @@ public class VideoServiceImpl implements VideoService{
     @Autowired
     private VideoDao videoDao;
 
+
     @Override
-    public List<Video> getVideoRankByLike() {
-        List<Video> list = videoDao.getUserAll();
-        Collections.sort(list, new Comparator<Video>() {
+    public List<VideoRaw> getAll() {
+        return videoDao.getVideoRawAll();
+    }
+
+    @Override
+    public List<VideoRaw> getVideoRankByLike() {
+        List<VideoRaw> list = videoDao.getVideoRawAll();
+        Collections.sort(list, new Comparator<VideoRaw>() {
             @Override
-            public int compare(Video o1, Video o2) {
-                long res = DataUtil.stringToNum(o1.getLike_num()) - DataUtil.stringToNum(o2.getLike_num());
+            public int compare(VideoRaw o1, VideoRaw o2) {
+                long res = DataUtil.stringToNum(o1.getLikeNum()) - DataUtil.stringToNum(o2.getLikeNum());
                 if(res == 0){
                     return 0;
                 }
@@ -33,12 +39,12 @@ public class VideoServiceImpl implements VideoService{
     }
 
     @Override
-    public List<Video> getVideoRankByComment() {
-        List<Video> list = videoDao.getUserAll();
-        Collections.sort(list, new Comparator<Video>() {
+    public List<VideoRaw> getVideoRankByComment() {
+        List<VideoRaw> list = videoDao.getVideoRawAll();
+        Collections.sort(list, new Comparator<VideoRaw>() {
             @Override
-            public int compare(Video o1, Video o2) {
-                long res = DataUtil.stringToNum(o1.getComment_num()) - DataUtil.stringToNum(o2.getComment_num());
+            public int compare(VideoRaw o1, VideoRaw o2) {
+                long res = DataUtil.stringToNum(o1.getCommentNum()) - DataUtil.stringToNum(o2.getCommentNum());
                 if(res == 0){
                     return 0;
                 }
@@ -49,12 +55,12 @@ public class VideoServiceImpl implements VideoService{
     }
 
     @Override
-    public List<Video> getVideoRankByCollect() {
-        List<Video> list = videoDao.getUserAll();
-        Collections.sort(list, new Comparator<Video>() {
+    public List<VideoRaw> getVideoRankByCollect() {
+        List<VideoRaw> list = videoDao.getVideoRawAll();
+        Collections.sort(list, new Comparator<VideoRaw>() {
             @Override
-            public int compare(Video o1, Video o2) {
-                long res = DataUtil.stringToNum(o1.getCollect_num()) - DataUtil.stringToNum(o2.getCollect_num());
+            public int compare(VideoRaw o1, VideoRaw o2) {
+                long res = DataUtil.stringToNum(o1.getCollectNum()) - DataUtil.stringToNum(o2.getCollectNum());
                 if(res == 0){
                     return 0;
                 }

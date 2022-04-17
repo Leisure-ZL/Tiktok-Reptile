@@ -4,7 +4,6 @@ public class BaseResponse<T> {
 
     private int code;
     private String msg;
-    private String checksum;
     private T data;
 
     public int getCode() {
@@ -23,14 +22,6 @@ public class BaseResponse<T> {
         this.msg = msg;
     }
 
-    public String getChecksum() {
-        return checksum;
-    }
-
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
-    }
-
     public T getData() {
         return data;
     }
@@ -44,7 +35,6 @@ public class BaseResponse<T> {
         return "BaseResponse{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
-                ", checksum='" + checksum + '\'' +
                 ", data=" + data +
                 '}';
     }

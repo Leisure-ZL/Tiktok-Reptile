@@ -7,11 +7,11 @@ public class UserRaw {
     //博主昵称
     private String nickname;
     //粉丝数
-    private String follower_count;
+    private String followerCount;
     //总获赞数
-    private String total_favorited;
+    private String likeCount;
     //主页链接
-    private String user_link;
+    private String link;
 
     public int getId() {
         return id;
@@ -29,28 +29,28 @@ public class UserRaw {
         this.nickname = nickname;
     }
 
-    public String getFollower_count() {
-        return follower_count;
+    public String getFollowerCount() {
+        return followerCount;
     }
 
-    public void setFollower_count(String follower_count) {
-        this.follower_count = follower_count;
+    public void setFollowerCount(String followerCount) {
+        this.followerCount = followerCount;
     }
 
-    public String getTotal_favorited() {
-        return total_favorited;
+    public String getLikeCount() {
+        return likeCount;
     }
 
-    public void setTotal_favorited(String total_favorited) {
-        this.total_favorited = total_favorited;
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
     }
 
-    public String getUser_link() {
-        return user_link;
+    public String getLink() {
+        return link;
     }
 
-    public void setUser_link(String user_link) {
-        this.user_link = user_link;
+    public void setLink(String link) {
+        this.link = link;
     }
 
 
@@ -59,9 +59,9 @@ public class UserRaw {
         return "User{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
-                ", follower_count='" + follower_count + '\'' +
-                ", total_favorited='" + total_favorited + '\'' +
-                ", user_link='" + user_link + '\'' +
+                ", follower_count='" + followerCount + '\'' +
+                ", total_favorited='" + likeCount + '\'' +
+                ", user_link='" + link + '\'' +
                 '}';
     }
 }

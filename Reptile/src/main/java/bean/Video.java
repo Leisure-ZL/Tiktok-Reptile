@@ -3,19 +3,28 @@ package bean;
 public class Video {
 
     private int id;
-    private String video_name;
-    private String like_num;
-    private String comment_num;
-    private String collect_num;
+    private String videoName;
+    private String likeNum;
+    private String commentNum;
+    private String collectNum;
+    private String userName;
     private String url;
-    private String user_name;
+    private String videoUrl;
 
-    public String getUser_name() {
-        return user_name;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getId() {
@@ -26,36 +35,36 @@ public class Video {
         this.id = id;
     }
 
-    public String getVideo_name() {
-        return video_name;
+    public String getVideoName() {
+        return videoName;
     }
 
-    public void setVideo_name(String video_name) {
-        this.video_name = video_name;
+    public void setVideoName(String videoName) {
+        this.videoName = videoName;
     }
 
-    public String getLike_num() {
-        return like_num;
+    public String getLikeNum() {
+        return likeNum;
     }
 
-    public void setLike_num(String like_num) {
-        this.like_num = like_num;
+    public void setLikeNum(String likeNum) {
+        this.likeNum = likeNum;
     }
 
-    public String getComment_num() {
-        return comment_num;
+    public String getCommentNum() {
+        return commentNum;
     }
 
-    public void setComment_num(String comment_num) {
-        this.comment_num = comment_num;
+    public void setCommentNum(String commentNum) {
+        this.commentNum = commentNum;
     }
 
-    public String getCollect_num() {
-        return collect_num;
+    public String getCollectNum() {
+        return collectNum;
     }
 
-    public void setCollect_num(String collect_num) {
-        this.collect_num = collect_num;
+    public void setCollectNum(String collectNum) {
+        this.collectNum = collectNum;
     }
 
     public String getUrl() {

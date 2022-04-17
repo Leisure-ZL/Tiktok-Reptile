@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
         dataBinding.lifecycleOwner = this
         dataBinding.loginVM = viewModel
 
+
         //观察loginInfo
         val observer = Observer<BaseResponse<Account>>() {
             if (it != null) {

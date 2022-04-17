@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import cn.edu.swu.reptile_android.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,8 +17,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initNavAndPager()
+
+    }
+
+
+
+    private fun initNavAndPager() {
         val vp2 = findViewById<ViewPager2>(R.id.vp2_main)
         val navView = findViewById<BottomNavigationView>(R.id.btm_nav_view)
+
+        //禁止滑动
+        vp2.isUserInputEnabled = false
 
         navView.setOnNavigationItemSelectedListener {
             when(it.itemId) {
@@ -48,16 +59,18 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        initPager()
-
-    }
-
-    private fun initPager() {
-
         val fragments = listOf(HomeFragment(), UserFragment(), VideoFragment(), MyFragment())
 
-        //TODO:adapter
 
+        vp2.adapter = object: FragmentStateAdapter(this) {
+            override fun getItemCount(): Int = fragments.size
+
+            override fun createFragment(position: Int): Fragment = fragments[position]
+
+        }
     }
 
+
 }
+
+

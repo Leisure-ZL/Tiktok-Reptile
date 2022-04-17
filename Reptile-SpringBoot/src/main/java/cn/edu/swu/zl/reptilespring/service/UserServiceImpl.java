@@ -19,16 +19,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserRaw> getAll() {
-        return userDao.getUserAll();
+        return userDao.getUserRawAll();
     }
 
     @Override
     public List<UserRaw> getUserRankByFollower() {
-        List<UserRaw> list = userDao.getUserAll();
+        List<UserRaw> list = userDao.getUserRawAll();
         Collections.sort(list, new Comparator<UserRaw>() {
             @Override
             public int compare(UserRaw o1, UserRaw o2) {
-                long res = DataUtil.stringToNum(o1.getFollower_count()) - DataUtil.stringToNum(o2.getFollower_count());
+                long res = DataUtil.stringToNum(o1.getFollowerCount()) - DataUtil.stringToNum(o2.getFollowerCount());
                 if(res == 0){
                     return 0;
                 }
@@ -38,12 +38,10 @@ public class UserServiceImpl implements UserService {
         return list.subList(0,100);
     }
 
+
     @Override
     public List<User> getUserRankByIncremental() {
-
-
-
-        return null;
+        return userDao.getUserIncAllByDesc().subList(0,5);
     }
 
 

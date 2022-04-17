@@ -1,31 +1,31 @@
 package cn.edu.swu.zl.reptilespring.entity;
 
 public class User extends UserRaw {
-    private String head_img;
-    private long follower_incremental;
-    private long like_incremental;
+    private String headImg;
+    private long followerIncremental;
+    private long likeIncremental;
 
-    public String getHead_img() {
-        return head_img;
+    public String getHeadImg() {
+        return headImg;
     }
 
-    public void setHead_img(String head_img) {
-        this.head_img = head_img;
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
     }
 
-    public long getFollower_incremental() {
-        return follower_incremental;
+    public long getFollowerIncremental() {
+        return followerIncremental;
     }
 
-    public void setFollower_incremental(long follower_incremental) {
-        this.follower_incremental = follower_incremental;
+    public void setFollowerIncremental(long followerIncremental) {
+        this.followerIncremental = followerIncremental;
     }
 
-    public long getLike_incremental() {
-        return like_incremental;
+    public long getLikeIncremental() {
+        return likeIncremental;
     }
 
-    public void setLike_incremental(long like_incremental) {
-        this.like_incremental = like_incremental;
+    public void setLikeIncremental(long likeIncremental) {
+        this.likeIncremental = likeIncremental;
     }
 }

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
+@Deprecated("use BindingAdapter")
 class UserRankAdapter(val context: Context, val data: List<User>) : RecyclerView.Adapter<UserRankAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

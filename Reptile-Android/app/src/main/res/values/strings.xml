@@ -18,4 +18,18 @@
     <string name="more">更多</string>
     <string name="follower_text">粉丝数</string>
     <string name="video_title">热播视频榜</string>
+    <string name="like_text">点赞数</string>
+    <string name="comment_text">评论数</string>
+    <string name="collect_text">收藏数</string>
+    <string name="like_inc">点赞增量</string>
+    <string name="user_repo">达人库</string>
+
+    <string name="spinner_user_prompt">choose</string>
+    <string name="choose">筛选</string>
+    <!--    <string-array name="spinner_user">-->
+<!--        <item>昨日粉丝增量排序</item>-->
+<!--        <item>昨日点赞增量排序</item>-->
+<!--        <item>粉丝总量排序</item>-->
+<!--        <item>点赞总量排序</item>-->
+<!--    </string-array>-->
 </resources>

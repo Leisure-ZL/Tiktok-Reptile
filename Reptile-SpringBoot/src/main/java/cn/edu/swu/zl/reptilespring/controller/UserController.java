@@ -5,8 +5,8 @@ import cn.edu.swu.zl.reptilespring.entity.User;
 import cn.edu.swu.zl.reptilespring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -19,13 +19,44 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/user/inc_follower")
-    public BaseResponse<List<User>> getFollowerInc(){
+    public BaseResponse<List<User>> getFollowerInc(@RequestParam("size") int size){
         BaseResponse<List<User>> resp = new BaseResponse<>();
         resp.setCode(200);
         resp.setMsg("OK");
-        resp.setData(userService.getUserRankByIncremental());
+        resp.setData(userService.getUserByFollowerInc(size));
         return resp;
     }
+
+    @ResponseBody
+    @RequestMapping("/user/inc_like")
+    public BaseResponse<List<User>> getLikeInc(@RequestParam("size") int size){
+        BaseResponse<List<User>> resp = new BaseResponse<>();
+        resp.setCode(200);
+        resp.setMsg("OK");
+        resp.setData(userService.getUserByLikeInc(size));
+        return resp;
+    }
+
+    @ResponseBody
+    @RequestMapping("/user/follower")
+    public BaseResponse<List<User>> getFollower(@RequestParam("size") int size){
+        BaseResponse<List<User>> resp = new BaseResponse<>();
+        resp.setCode(200);
+        resp.setMsg("OK");
+        resp.setData(userService.getUserByFollower(size));
+        return resp;
+    }
+
+    @ResponseBody
+    @RequestMapping("/user/like")
+    public BaseResponse<List<User>> getLike(@RequestParam("size") int size){
+        BaseResponse<List<User>> resp = new BaseResponse<>();
+        resp.setCode(200);
+        resp.setMsg("OK");
+        resp.setData(userService.getUserByLike(size));
+        return resp;
+    }
+
 
 
 }

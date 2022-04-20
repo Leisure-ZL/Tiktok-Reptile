@@ -59,10 +59,18 @@ public class UserDao {
     * user_inc
     * */
 
-    public List<User> getUserIncAllByDesc(){
+    public List<User> getUserByFollowerInc(){
         String sql = "select * from user_inc order by follower_incremental desc";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper(User.class));
     }
+
+    public List<User> getUserByLikeInc(){
+        String sql = "select * from user order by like_incremental desc";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper(User.class));
+    }
+
+
+
 
     public boolean deleteUserFromUserIcnTab(User user){
         String sql = "delete from user_inc where id=?;";

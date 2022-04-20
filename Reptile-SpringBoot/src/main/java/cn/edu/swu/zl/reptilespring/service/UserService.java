@@ -13,9 +13,17 @@ public interface UserService {
     //获取用户粉丝数排名(从大到小)
     public List<UserRaw> getUserRankByFollower();
 
-    //获取用户粉丝增量排名 （前5）
-    List<User> getUserRankByIncremental();
+    //获取用户粉丝增量排名
+    List<User> getUserByFollowerInc(int size);
 
+    //获取用户点赞增量排名
+    List<User> getUserByLikeInc(int size);
+
+    //获取用户粉丝排名
+    List<User> getUserByFollower(int size);
+
+    //获取用户点赞排名
+    List<User> getUserByLike(int size);
 
 
 

@@ -10,8 +10,21 @@ class UserRepository {
     private val retrofit = NetApi.getRetrofit()
     private val service: ApiService = retrofit.create(ApiService::class.java)
 
-    suspend fun getUserByFollowerInc(): BaseResponse<List<User>> {
-        return service.getUserByFollowerInc();
+    suspend fun getUserByFollowerInc(size: Int): BaseResponse<List<User>> {
+        return service.getUserByFollowerInc(size);
     }
+
+    suspend fun getUserByLikeInc(size: Int): BaseResponse<List<User>> {
+        return service.getUserByLikeInc(size);
+    }
+
+    suspend fun getUserByFollower(size: Int): BaseResponse<List<User>> {
+        return service.getUserByFollower(size);
+    }
+
+    suspend fun getUserByLike(size: Int): BaseResponse<List<User>> {
+        return service.getUserByLike(size);
+    }
+
 
 }

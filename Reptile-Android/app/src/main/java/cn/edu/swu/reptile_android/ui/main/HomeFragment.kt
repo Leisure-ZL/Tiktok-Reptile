@@ -1,12 +1,12 @@
 package cn.edu.swu.reptile_android.ui.main
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,17 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
-import cn.edu.swu.reptile_android.model.entity.Account
+import cn.edu.swu.reptile_android.databinding.ItemRvRankUserBinding
+import cn.edu.swu.reptile_android.databinding.ItemRvRankVideoBinding
 import cn.edu.swu.reptile_android.model.entity.BannerImg
 import cn.edu.swu.reptile_android.model.entity.HomeFun
 import cn.edu.swu.reptile_android.model.entity.User
-import cn.edu.swu.reptile_android.ui.main.adapter.FunAdapter
-import cn.edu.swu.reptile_android.ui.main.adapter.UserRankAdapter
+import cn.edu.swu.reptile_android.model.entity.Video
+import cn.edu.swu.reptile_android.ui.base.BaseAdapter
+import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.youth.banner.Banner
@@ -44,6 +46,7 @@ class HomeFragment : Fragment() {
     private lateinit var funRv: RecyclerView
 
     private lateinit var userRankRv: RecyclerView
+    private lateinit var videoRankRv: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +82,9 @@ class HomeFragment : Fragment() {
         initUserRank()
 
 
+        //初始化videoRank
+        videoRankRv = view.findViewById(R.id.rv_rank_video)
+        initVideoRank()
 
         return view
     }
@@ -118,7 +124,18 @@ class HomeFragment : Fragment() {
 
     private fun initFunList(){
         val data: List<HomeFun> = vm.funData
-        val funAdapter = context?.let { FunAdapter(it, data) }
+
+        val funAdapter = BaseAdapter(R.layout.item_rv_home_fun, data) { view, homeFun ->
+            view.findViewById<TextView>(R.id.tv_title).text = homeFun.title
+            Glide.with(view).load(homeFun.img).into(view.findViewById(R.id.iv_icon))
+        }
+
+        funAdapter.setOnItemClickListener(object: BaseAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                Log.d("tag",position.toString())
+                //TODO:to intent
+            }
+        })
         funRv.adapter = funAdapter
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = RecyclerView.HORIZONTAL
@@ -134,16 +151,64 @@ class HomeFragment : Fragment() {
                 if(it.code != 200){
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
                 }else{
-                    val userRankAdapter = context?.let { it1 -> UserRankAdapter(it1, it.data) }
+                   val userRankAdapter = BindingAdapter(R.layout.item_rv_rank_user, it.data) {
+                       view, user ->
+                       val binding: ItemRvRankUserBinding? = DataBindingUtil.getBinding(view)
+                       if (binding != null) {
+                           binding.user = user
+                           binding.executePendingBindings()
+                       }
+                       //头像
+                       val roundedCorners = RoundedCorners(60)
+                       val options = RequestOptions.bitmapTransform(roundedCorners)
+                       Glide.with(view)
+                           .load(R.drawable.test_head_user)
+                           .apply(options)
+                           .into(view.findViewById(R.id.iv_head))
+                       //粉丝增量
+                       view.findViewById<TextView>(R.id.tv_follower_incremental).text =
+                           DataUtil.numToString(user.followerIncremental)
+                   }
                     userRankRv.adapter = userRankAdapter
                     userRankRv.layoutManager = LinearLayoutManager(context)
-                    userRankAdapter?.notifyDataSetChanged()
+                    userRankAdapter.notifyDataSetChanged()
                 }
             }
         }
         vm.userData.observe(viewLifecycleOwner,observer)
+    }
+
+    private fun initVideoRank() {
+        vm.getVideoByLikeInc()
+
+        val observer = Observer<BaseResponse<List<Video>>> {
+            if (it != null) {
+                if(it.code != 200){
+                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
+                }else{
+                    val videoRankAdapter = BindingAdapter(R.layout.item_rv_rank_video, it.data) {
+                            view, video ->
+                        val binding: ItemRvRankVideoBinding? = DataBindingUtil.getBinding(view)
+                        if (binding != null) {
+                            binding.video = video
+                            binding.executePendingBindings()
+                        }
+                        //增量
+//                        view.findViewById<TextView>(R.id.tv_video_inc).text =
+//                            DataUtil.numToString(video.likeIncremental)
+
+                    }
+                    videoRankRv.adapter = videoRankAdapter
+                    videoRankRv.layoutManager = LinearLayoutManager(context)
+                    videoRankAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        vm.videoData.observe(viewLifecycleOwner,observer)
+
 
     }
+
 
 
 }

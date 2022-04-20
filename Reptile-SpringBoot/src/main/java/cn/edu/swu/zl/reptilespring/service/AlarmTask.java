@@ -43,6 +43,9 @@ public class AlarmTask {
         for(UserRaw e : list){
             System.out.println("update "+ e.toString());
             User user = getUser(e.getLink());
+            if(user == null){
+                continue;
+            }
             //计算增量，重新封装user
             user.setId(e.getId());
             user.setNickname(e.getNickname());
@@ -65,10 +68,16 @@ public class AlarmTask {
 
 
     public void updateVideoIncremental(){
+        System.getProperties().setProperty("webdriver.chrome.driver", "doc/util/chromedriver.exe");
+        driver = new ChromeDriver();
+
         List<VideoRaw> list = videoDao.getVideoRawAll();
 
         for(VideoRaw e : list){
             Video video = getVideo(e.getUrl());
+            if(video == null){
+                continue;
+            }
             video.setId(e.getId());
             video.setVideoName(e.getVideoName());
             video.setUrl(e.getUrl());
@@ -89,6 +98,15 @@ public class AlarmTask {
         }
 
 
+    }
+
+    public boolean isExistElement(WebDriver webDriver, By by) {
+        try {
+            webDriver.findElement(by);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void updateUserIncTable(User user){
@@ -122,6 +140,10 @@ public class AlarmTask {
         }
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
+        //先判断是否存在元素
+        if(!isExistElement(driver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"))){
+            return null;
+        }
         WebElement followerView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"));
         WebElement likeView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[3]/div[2]"));
         WebElement headImg = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/img"));
@@ -142,6 +164,10 @@ public class AlarmTask {
             e.printStackTrace();
         }
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        if(!isExistElement(driver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"))){
+            return null;
+        }
         WebElement likeView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"));
         WebElement commentView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[2]/span"));
         WebElement collectView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[3]/span"));

@@ -49,11 +49,12 @@ public class VideoDao {
 
     public boolean insertVideoToVideoTab(Video video) {
         String sql = "insert into video values(?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
-                "like_num=?,comment_num=?,collect_num=?,like_incremental=?,comment_incremental=?,collect_incremental=?" +
-                "like_incremental=?";
+                "like_num=?,comment_num=?,collect_num=?,like_incremental=?,comment_incremental=?,collect_incremental=?";
         Object[] objects = new Object[]{
                 video.getId(),video.getVideoName(),video.getLikeNum(),video.getCommentNum(),video.getCollectNum(),
                 video.getUserName(),video.getVideoUrl(),video.getUrl(),(int)video.getLikeIncremental(),
+                (int)video.getCommentIncremental(),(int)video.getCollectIncremental(),video.getLikeNum(),
+                video.getCommentNum(),video.getCollectNum(),(int)video.getLikeIncremental(),
                 (int)video.getCommentIncremental(),(int)video.getCollectIncremental()
         };
         int res = jdbcTemplate.update(sql,objects);
@@ -81,7 +82,7 @@ public class VideoDao {
     }
 
     public boolean insertVideoToVideoIncTab(Video video) {
-        String sql = "insert into video_inc values(?,?,?,?,?,?,?,?);";
+        String sql = "insert into video_inc values(?,?,?,?,?,?,?,?,?,?,?);";
         Object[] objects = new Object[]{
                 video.getId(),video.getVideoName(),video.getLikeNum(),video.getCommentNum(),video.getCollectNum(),
                 video.getUserName(),video.getVideoUrl(),video.getUrl(),(int)video.getLikeIncremental(),

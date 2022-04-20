@@ -16,31 +16,7 @@
         android:padding="16dp"
         tools:context=".ui.main.HomeFragment">
 
-        <LinearLayout
-            android:id="@+id/top_search"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/round_et"
-            android:orientation="horizontal"
-            android:paddingRight="24dp">
-
-            <EditText
-                android:id="@+id/et_search"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/round_et"
-                android:hint="@string/search"
-                android:paddingLeft="24dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:src="@drawable/ic_search" />
-
-        </LinearLayout>
+        <include layout="@layout/layout_search"/>
 
         <ScrollView
             android:layout_width="match_parent"

@@ -40,8 +40,45 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getUserRankByIncremental() {
-        return userDao.getUserIncAllByDesc().subList(0,5);
+    public List<User> getUserByFollowerInc(int size) {
+        return userDao.getUserByFollowerInc().subList(0, size);
+    }
+
+    @Override
+    public List<User> getUserByLikeInc(int size) {
+        return userDao.getUserByLikeInc().subList(0, size);
+    }
+
+    @Override
+    public List<User> getUserByFollower(int size) {
+        List<User> list = userDao.getUserAll();
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                long res = DataUtil.stringToNum(o1.getFollowerCount()) - DataUtil.stringToNum(o2.getFollowerCount());
+                if(res == 0){
+                    return 0;
+                }
+                return res < 0 ? 1 : -1;
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public List<User> getUserByLike(int size) {
+        List<User> list = userDao.getUserAll();
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                long res = DataUtil.stringToNum(o1.getLikeCount()) - DataUtil.stringToNum(o2.getLikeCount());
+                if(res == 0){
+                    return 0;
+                }
+                return res < 0 ? 1 : -1;
+            }
+        });
+        return list;
     }
 
 

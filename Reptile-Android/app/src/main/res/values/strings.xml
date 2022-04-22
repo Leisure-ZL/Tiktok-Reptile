@@ -26,10 +26,28 @@
 
     <string name="spinner_user_prompt">choose</string>
     <string name="choose">筛选</string>
+    <string name="video_repo">视频库</string>
+    <string name="like_num">点赞数</string>
+    <string name="nomore_text">已显示全部内容</string>
+    <string name="user_co_text">达人收藏</string>
+    <string name="video_co_text">视频收藏</string>
+    <string name="fun_text">常用功能</string>
+    <string name="more_util">更多工具</string>
+    <string name="text_lljl">浏览记录</string>
+    <string name="setting_item1">头像</string>
+    <string name="setting_item2">昵称</string>
+    <string name="setting_item3">更改手机号</string>
+    <string name="setting_item4">设置密码</string>
+    <string name="setting_item5">微信绑定</string>
+    <string name="setting_item6">联系客服</string>
+    <string name="setting_item7">分享App</string>
+    <string name="setting_item8">关于我们</string>
+    <string name="setting_item9">检查版本</string>
+    <string name="setting_out_login">退出登录</string>
     <!--    <string-array name="spinner_user">-->
-<!--        <item>昨日粉丝增量排序</item>-->
-<!--        <item>昨日点赞增量排序</item>-->
-<!--        <item>粉丝总量排序</item>-->
-<!--        <item>点赞总量排序</item>-->
-<!--    </string-array>-->
+    <!--        <item>昨日粉丝增量排序</item>-->
+    <!--        <item>昨日点赞增量排序</item>-->
+    <!--        <item>粉丝总量排序</item>-->
+    <!--        <item>点赞总量排序</item>-->
+    <!--    </string-array>-->
 </resources>

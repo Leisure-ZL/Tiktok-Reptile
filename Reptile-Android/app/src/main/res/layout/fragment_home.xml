@@ -109,6 +109,12 @@
                         android:layout_marginTop="48dp"/>
                 </RelativeLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:text="@string/nomore_text"
+                    android:textSize="12sp"
+                    android:gravity="center"/>
 
             </LinearLayout>
         </ScrollView>

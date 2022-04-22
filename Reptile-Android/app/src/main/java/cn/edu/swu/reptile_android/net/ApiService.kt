@@ -38,6 +38,20 @@ interface ApiService {
      * */
 
     @GET("/video/inc_like")
-    suspend fun getVideoByLikeInc(): BaseResponse<List<Video>>
+    suspend fun getVideoByLikeInc(@Query("size") size: Int): BaseResponse<List<Video>>
 
+    @GET("/video/inc_comment")
+    suspend fun getVideoByCommentInc(@Query("size") size: Int): BaseResponse<List<Video>>
+
+    @GET("/video/inc_collect")
+    suspend fun getVideoByCollectInc(@Query("size") size: Int): BaseResponse<List<Video>>
+
+    @GET("/video/like")
+    suspend fun getVideoByLike(@Query("size") size: Int): BaseResponse<List<Video>>
+
+    @GET("/video/comment")
+    suspend fun getVideoByComment(@Query("size") size: Int): BaseResponse<List<Video>>
+
+    @GET("/video/collect")
+    suspend fun getVideoByCollect(@Query("size") size: Int): BaseResponse<List<Video>>
 }

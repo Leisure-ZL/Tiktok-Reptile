@@ -5,56 +5,133 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
+import cn.edu.swu.reptile_android.base.BaseResponse
+import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
+import cn.edu.swu.reptile_android.databinding.ItemRvFragmentVideoBinding
+import cn.edu.swu.reptile_android.model.entity.User
+import cn.edu.swu.reptile_android.model.entity.Video
+import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.base.DropdownMenu
+import cn.edu.swu.reptile_android.utils.DataUtil
+import cn.edu.swu.reptile_android.viewmodel.UserViewModel
+import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [VideoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class VideoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+
+    private val vm = VideoViewModel()
+
+    private lateinit var refresh: RefreshLayout
+    private var cur: Int = 0
+
+    lateinit var rv: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_video, container, false)
+        val view = inflater.inflate(R.layout.fragment_video, container, false)
+
+        //init dropdown
+        initDropdownMenu(view)
+
+        //初始化Refresh
+        refresh = view.findViewById<View>(R.id.refreshLayout) as RefreshLayout
+        initRefresh()
+
+        //init rv
+        rv = view.findViewById(R.id.rv)
+        initRv()
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment VideoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            VideoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initRefresh() {
+        refresh.setRefreshHeader(ClassicsHeader(context))
+        refresh.setOnRefreshListener {
+            when (cur) {
+                0 -> vm.getVideoByLikeInc()
+                1 -> vm.getVideoByCommentInc()
+                2 -> vm.getVideoByCollectInc()
+                3 -> vm.getVideoByLike()
+                4 -> vm.getVideoByComment()
+                5 -> vm.getVideoByCollect()
+            }
+            refresh.finishRefresh(1000)
+        }
+    }
+
+
+    private fun initDropdownMenu(view: View) {
+        val dropdownMenu = DropdownMenu(context)
+        dropdownMenu.init(view, vm.dropdownData)
+        dropdownMenu.setOnItemSelectListener(object : DropdownMenu.OnItemSelectListener {
+            override fun onItemSelect(position: Int) {
+                cur = position
+                when (position) {
+                    0 -> vm.getVideoByLikeInc()
+                    1 -> vm.getVideoByCommentInc()
+                    2 -> vm.getVideoByCollectInc()
+                    3 -> vm.getVideoByLike()
+                    4 -> vm.getVideoByComment()
+                    5 -> vm.getVideoByCollect()
                 }
             }
+            override fun onDismiss() {
+
+            }
+        })
     }
+
+    private fun initRv() {
+
+        //请求数据
+
+        vm.getVideoByLikeInc()
+
+        val observer = Observer<BaseResponse<List<Video>>> {
+            if (it != null) {
+                if (it.code != 200) {
+                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    val videoRankAdapter =
+                        BindingAdapter(R.layout.item_rv_fragment_video, it.data) { view, video ->
+                            val binding: ItemRvFragmentVideoBinding? =
+                                DataBindingUtil.getBinding(view)
+                            if (binding != null) {
+                                binding.video = video
+                                binding.executePendingBindings()
+                            }
+                        }
+                    rv.adapter = videoRankAdapter
+                    rv.layoutManager = LinearLayoutManager(context)
+                    videoRankAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        vm.rvData.observe(viewLifecycleOwner, observer)
+
+    }
+
+
+
+
 }

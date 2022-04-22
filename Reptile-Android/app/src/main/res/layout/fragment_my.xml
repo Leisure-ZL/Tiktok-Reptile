@@ -1,15 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:id="@+id/fragment_my"
     tools:context=".ui.main.MyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:id="@+id/top_bar"
+        android:orientation="horizontal"
+        android:gravity="right|center_vertical">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_setting"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/ic_setting"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/head_img"
+            android:src="@drawable/test_head"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_nickname"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/head_img"
+            android:layout_marginLeft="16dp"
+            android:text="18223345669"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="36dp"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_collect_user"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_co_text"
+                android:text="@string/user_co_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="36dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_collect_video"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/video_co_text"
+                android:id="@+id/video_co_text"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/border_shadow"
+        android:padding="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fun_text"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/border_underline"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/fun_item1"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_jrdp"
+            android:layout_above="@id/fun_item1_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fun_item1_text"
+            android:layout_alignParentBottom="true"
+            android:text="今日大盘"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/fun_item2"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_yhjk"
+            android:layout_toRightOf="@id/fun_item1"
+            android:layout_marginLeft="36dp"
+            android:layout_above="@id/fun_item1_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fun_item2_text"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="36dp"
+            android:layout_toRightOf="@id/fun_item1_text"
+            android:text="用户监控"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/fun_item3"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_spjk"
+            android:layout_marginLeft="36dp"
+            android:layout_toRightOf="@id/fun_item2"
+            android:layout_above="@id/fun_item1_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fun_item3_text"
+            android:layout_toRightOf="@id/fun_item2_text"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="36dp"
+            android:text="视频监控"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/border_shadow"
+        android:padding="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/more_util"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:paddingBottom="12dp"
+            android:id="@+id/more_util"
+            android:background="@drawable/border_underline"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/util_item1"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_lljl"
+            android:layout_below="@id/more_util"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/util_item1_text"
+            android:layout_alignParentBottom="true"
+            android:text="@string/text_lljl"
+            android:layout_below="@id/util_item1"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -26,25 +26,34 @@
 
     <include layout="@layout/layout_dropdown_menu"/>
 
-
-    <FrameLayout
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp">
-
-        <androidx.recyclerview.widget.RecyclerView
+        <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rv"/>
-
-        <View
+            android:layout_height="wrap_content" />
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/mask_view"
-            android:visibility="gone"
-            android:background="@color/shadow_bg"/>
+            android:layout_height="wrap_content">
 
-    </FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mask_view"
+                android:visibility="gone"
+                android:background="@color/shadow_bg"/>
+        </FrameLayout>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout >
+
+
 
 
 </LinearLayout>

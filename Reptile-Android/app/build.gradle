@@ -2,6 +2,40 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+apply plugin: 'com.mob.sdk'
+//
+//MobSDK {
+//    appKey ""
+//    appSecret ""
+//    SecVerify {}
+//}
+
+MobSDK {
+    appKey "35c7fb3cdfac0"
+    appSecret "867e27f594eeb210bcd2293b1594a699"
+    ShareSDK {
+        loopShare true
+        devInfo {
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            WechatMoments {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            WechatFavorite {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+        }
+    }
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"

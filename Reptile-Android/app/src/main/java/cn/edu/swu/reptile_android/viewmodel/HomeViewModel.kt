@@ -46,7 +46,7 @@ class HomeViewModel : ViewModel() {
 
     fun getVideoByLikeInc() {
         GlobalScope.launch(Dispatchers.Main) {
-            val resp = videoRepo.getVideoByLikeInc()
+            val resp = videoRepo.getVideoByLikeInc(5)
             videoData.value = resp
         }
     }

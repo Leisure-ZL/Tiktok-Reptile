@@ -73,6 +73,7 @@
             android:gravity="center"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:onClick="clickWechat"
             android:text="@string/wechat"
             android:textColor="@color/white"
             app:backgroundTint="#31CF11"

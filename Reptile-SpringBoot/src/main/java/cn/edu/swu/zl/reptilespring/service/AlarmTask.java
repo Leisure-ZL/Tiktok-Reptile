@@ -27,12 +27,13 @@ public class AlarmTask {
     @Autowired
     private VideoDao videoDao;
 
-    WebDriver driver;
+    WebDriver userDriver;
+    WebDriver videoDriver;
 
    // @Scheduled(cron = "0/5 * * * * *")
     public void updateUserIncremental(){
         System.getProperties().setProperty("webdriver.chrome.driver", "doc/util/chromedriver.exe");
-        driver = new ChromeDriver();
+        userDriver = new ChromeDriver();
         System.out.println("进行数据更新");
 
         //数据库获取userRaw
@@ -60,7 +61,7 @@ public class AlarmTask {
             userDao.updateUserRaw(e);
 
             //更新user_inc
-            updateUserIncTable(user);
+          //  updateUserIncTable(user);
         }
         System.out.println("数据更新结束");
 
@@ -69,11 +70,12 @@ public class AlarmTask {
 
     public void updateVideoIncremental(){
         System.getProperties().setProperty("webdriver.chrome.driver", "doc/util/chromedriver.exe");
-        driver = new ChromeDriver();
+        videoDriver = new ChromeDriver();
 
         List<VideoRaw> list = videoDao.getVideoRawAll();
 
         for(VideoRaw e : list){
+            System.out.println("update "+ e.toString());
             Video video = getVideo(e.getUrl());
             if(video == null){
                 continue;
@@ -93,7 +95,7 @@ public class AlarmTask {
             e.setCollectNum(video.getCollectNum());
             videoDao.updateVideoRaw(e);
 
-            updateVideoIncTable(video);
+         //   updateVideoIncTable(video);
 
         }
 
@@ -132,21 +134,21 @@ public class AlarmTask {
     public User getUser(String url){
 
         User user = new User();
-        driver.get("https:"+url);
+        userDriver.get("https:"+url);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        userDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         //先判断是否存在元素
-        if(!isExistElement(driver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"))){
+        if(!isExistElement(userDriver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"))){
             return null;
         }
-        WebElement followerView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"));
-        WebElement likeView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[3]/div[2]"));
-        WebElement headImg = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/img"));
+        WebElement followerView = userDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]"));
+        WebElement likeView = userDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[2]/div[3]/div[2]"));
+        WebElement headImg = userDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div[1]/div[1]/div[1]/div/img"));
 
         user.setHeadImg(headImg.getAttribute("src"));
         user.setFollowerCount(followerView.getText());
@@ -157,20 +159,20 @@ public class AlarmTask {
 
     public Video getVideo(String url){
         Video video = new Video();
-        driver.get(url);
+        videoDriver.get(url);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        videoDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-        if(!isExistElement(driver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"))){
+        if(!isExistElement(videoDriver,By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"))){
             return null;
         }
-        WebElement likeView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"));
-        WebElement commentView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[2]/span"));
-        WebElement collectView = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[3]/span"));
+        WebElement likeView = videoDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[1]/span"));
+        WebElement commentView = videoDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[2]/span"));
+        WebElement collectView = videoDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div[3]/span"));
 
         video.setLikeNum(likeView.getText());
         video.setCommentNum(commentView.getText());

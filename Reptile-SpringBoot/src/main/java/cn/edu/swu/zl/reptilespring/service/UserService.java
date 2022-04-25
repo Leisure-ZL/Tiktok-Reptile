@@ -4,6 +4,7 @@ import cn.edu.swu.zl.reptilespring.entity.User;
 import cn.edu.swu.zl.reptilespring.entity.UserRaw;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -25,6 +26,10 @@ public interface UserService {
     //获取用户点赞排名
     List<User> getUserByLike(int size);
 
+    //通过id查询User
+    User getUser(Map<String,String> map);
 
+    //通过关键字模糊查询
+    List<User> getUserByVague(String s);
 
 }

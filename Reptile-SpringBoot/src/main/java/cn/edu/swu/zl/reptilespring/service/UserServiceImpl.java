@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,44 +42,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUserByFollowerInc(int size) {
-        return userDao.getUserByFollowerInc().subList(0, size);
+        return userDao.getUserByFollowerInc(size);
     }
 
     @Override
     public List<User> getUserByLikeInc(int size) {
-        return userDao.getUserByLikeInc().subList(0, size);
+        return userDao.getUserByLikeInc(size);
     }
 
     @Override
     public List<User> getUserByFollower(int size) {
-        List<User> list = userDao.getUserAll();
-        Collections.sort(list, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                long res = DataUtil.stringToNum(o1.getFollowerCount()) - DataUtil.stringToNum(o2.getFollowerCount());
-                if(res == 0){
-                    return 0;
-                }
-                return res < 0 ? 1 : -1;
-            }
-        });
-        return list;
+        return userDao.getUserByFollower(size);
     }
 
     @Override
     public List<User> getUserByLike(int size) {
-        List<User> list = userDao.getUserAll();
-        Collections.sort(list, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                long res = DataUtil.stringToNum(o1.getLikeCount()) - DataUtil.stringToNum(o2.getLikeCount());
-                if(res == 0){
-                    return 0;
-                }
-                return res < 0 ? 1 : -1;
-            }
-        });
-        return list;
+        return userDao.getUserByLike(size);
+    }
+
+    @Override
+    public User getUser(Map<String,String> map) {
+        return userDao.getUser(map);
+    }
+
+    @Override
+    public List<User> getUserByVague(String s) {
+        return userDao.getUserByVague(s);
     }
 
 

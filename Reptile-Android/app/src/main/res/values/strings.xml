@@ -44,6 +44,15 @@
     <string name="setting_item8">关于我们</string>
     <string name="setting_item9">检查版本</string>
     <string name="setting_out_login">退出登录</string>
+    <string name="co">收藏</string>
+    <string name="all_follower">总粉丝数</string>
+    <string name="all_like">总点赞数</string>
+    <string name="follower_text_">粉丝数：</string>
+    <string name="phone_login">手机号登录</string>
+    <string name="Verification">验证码</string>
+    <string name="phone_num">手机号</string>
+    <string name="verity">获取验证码</string>
+    <string name="title_login">登录</string>
     <!--    <string-array name="spinner_user">-->
     <!--        <item>昨日粉丝增量排序</item>-->
     <!--        <item>昨日点赞增量排序</item>-->

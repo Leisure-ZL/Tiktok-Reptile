@@ -24,58 +24,34 @@ public class VideoServiceImpl implements VideoService{
     }
 
     @Override
-    public List<Video> getVideoRankByIncremental() {
-        return videoDao.getVideoIncAllByDesc().subList(0,5);
+    public List<Video> getVideoByLikeInc(int size) {
+        return videoDao.getVideoByLikeInc(size);
     }
 
     @Override
-    public List<VideoRaw> getVideoRankByLike() {
-        List<VideoRaw> list = videoDao.getVideoRawAll();
-        Collections.sort(list, new Comparator<VideoRaw>() {
-            @Override
-            public int compare(VideoRaw o1, VideoRaw o2) {
-                long res = DataUtil.stringToNum(o1.getLikeNum()) - DataUtil.stringToNum(o2.getLikeNum());
-                if(res == 0){
-                    return 0;
-                }
-                return res < 0 ? 1 : -1;
-            }
-        });
-        return list;
+    public List<Video> getVideoByLike(int size) {
+        return videoDao.getVideoByLike(size);
     }
 
     @Override
-    public List<VideoRaw> getVideoRankByComment() {
-        List<VideoRaw> list = videoDao.getVideoRawAll();
-        Collections.sort(list, new Comparator<VideoRaw>() {
-            @Override
-            public int compare(VideoRaw o1, VideoRaw o2) {
-                long res = DataUtil.stringToNum(o1.getCommentNum()) - DataUtil.stringToNum(o2.getCommentNum());
-                if(res == 0){
-                    return 0;
-                }
-                return res < 0 ? 1 : -1;
-            }
-        });
-        return list;
+    public List<Video> getVideoByComment(int size) {
+        return videoDao.getVideoByComment(size);
     }
 
     @Override
-    public List<VideoRaw> getVideoRankByCollect() {
-        List<VideoRaw> list = videoDao.getVideoRawAll();
-        Collections.sort(list, new Comparator<VideoRaw>() {
-            @Override
-            public int compare(VideoRaw o1, VideoRaw o2) {
-                long res = DataUtil.stringToNum(o1.getCollectNum()) - DataUtil.stringToNum(o2.getCollectNum());
-                if(res == 0){
-                    return 0;
-                }
-                return res < 0 ? 1 : -1;
-            }
-        });
-        return list;
+    public List<Video> getVideoByCollect(int size) {
+        return videoDao.getVideoByCollect(size);
     }
 
+    @Override
+    public List<Video> getVideoByCommentInc(int size) {
+        return videoDao.getVideoByCommentInc(size);
+    }
+
+    @Override
+    public List<Video> getVideoByCollectInc(int size) {
+        return videoDao.getVideoByCollectInc(size);
+    }
 
 
 }

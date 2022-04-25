@@ -26,5 +26,14 @@ class UserRepository {
         return service.getUserByLike(size);
     }
 
+    suspend fun getUser(key: String, value: String): BaseResponse<User> {
+        val map: Map<String, String> = mapOf("key" to key, "value" to value)
+        return service.getUser(map)
+    }
+
+    suspend fun getUserByVague(string: String): BaseResponse<List<User>>{
+        return service.getUserByVague(string)
+    }
+
 
 }

@@ -1,16 +1,13 @@
 package cn.edu.swu.reptile_android.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
+import cn.edu.swu.reptile_android.ui.user.UserFragment
+import cn.edu.swu.reptile_android.ui.video.VideoFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {

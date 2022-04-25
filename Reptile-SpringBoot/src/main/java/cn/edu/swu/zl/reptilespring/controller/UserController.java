@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -57,6 +58,34 @@ public class UserController {
         return resp;
     }
 
+    @ResponseBody
+    @RequestMapping("/user")
+    public BaseResponse<User> getUser(@RequestParam Map<String,String> map){
+        BaseResponse<User> resp = new BaseResponse<>();
+        if(userService.getUser(map) == null){
+            resp.setCode(-1);
+            resp.setMsg("not found");
+        }else {
+            resp.setCode(200);
+            resp.setMsg("OK");
+        }
+        resp.setData(userService.getUser(map));
+        System.out.println("req:" + map.toString());
+        System.out.println("resp:" + resp.toString());
+        return resp;
+    }
+
+    @ResponseBody
+    @RequestMapping("/user/vague")
+    public BaseResponse<List<User>> getUserByVague(@RequestParam("s") String s){
+        BaseResponse<List<User>> resp = new BaseResponse<>();
+        resp.setCode(200);
+        resp.setMsg("OK");
+        resp.setData(userService.getUserByVague(s));
+        System.out.println("req:" + s);
+        System.out.println("resp:" + resp.toString());
+        return resp;
+    }
 
 
 }

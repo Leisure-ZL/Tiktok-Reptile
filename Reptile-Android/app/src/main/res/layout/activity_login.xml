@@ -1,98 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginActivity">
 
-    <data>
-        <variable
-            name="loginVM"
-            type="cn.edu.swu.reptile_android.viewmodel.LoginViewModel" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/title_login"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
 
-    </data>
 
-    <RelativeLayout
+    <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.LoginActivity"
-        android:padding="48dp">
+        android:id="@+id/fragment"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="128dp"
-            android:id="@+id/in_account">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_account"
-                android:hint="@string/account"
-                android:text="@={loginVM.username}"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/in_password"
-            android:layout_below="@id/in_account"
-            android:layout_marginTop="16dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_password"
-                android:inputType="textPassword"
-                android:hint="@string/password"
-                android:text="@={loginVM.password}"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/in_password"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            app:backgroundTint="#D84F0F"
-            app:cornerRadius="12dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_wechat"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/btn_login"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="24dp"
-            android:gravity="center"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:onClick="clickWechat"
-            android:text="@string/wechat"
-            android:textColor="@color/white"
-            app:backgroundTint="#31CF11"
-            app:cornerRadius="12dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:id="@+id/btn_phone"
-            android:text="@string/login_phone"
-            android:layout_below="@id/btn_wechat"
-            android:textColor="@color/white"
-            android:insetBottom="0dp"
-            android:insetTop="0dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginTop="12dp"
-            app:cornerRadius="12dp"
-            android:gravity="center"/>
-
-    </RelativeLayout>
-</layout>
+</LinearLayout>

@@ -13,6 +13,7 @@ apply plugin: 'com.mob.sdk'
 MobSDK {
     appKey "35c7fb3cdfac0"
     appSecret "867e27f594eeb210bcd2293b1594a699"
+    SMSSDK {}
     ShareSDK {
         loopShare true
         devInfo {
@@ -42,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "cn.edu.swu.reptile_android"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -106,6 +107,10 @@ dependencies {
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
 //    implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+
+    //GSYVideoPlayer
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+
 
 
 

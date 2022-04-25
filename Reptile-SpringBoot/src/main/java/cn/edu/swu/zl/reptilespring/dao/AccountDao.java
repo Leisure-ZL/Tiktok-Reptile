@@ -61,7 +61,7 @@ public class AccountDao {
     public boolean registerAccount(Account account){
         String md5Password = DigestUtils.md5DigestAsHex(account.getPassword().getBytes());
 
-        final String sql = "insert into account(username, password, nickname, headImg) value(?,?,?,?);";
+        final String sql = "insert into account(username, password, nickname, head_img) value(?,?,?,?);";
 
         Object[] objects = new Object[]{account.getUsername(),md5Password,account.getNickname(),account.getHeadImg()};
 

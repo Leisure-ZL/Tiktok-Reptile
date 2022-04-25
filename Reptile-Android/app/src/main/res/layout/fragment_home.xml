@@ -16,7 +16,7 @@
         android:padding="16dp"
         tools:context=".ui.main.HomeFragment">
 
-        <include layout="@layout/layout_search"/>
+        <include layout="@layout/layout_search_tv"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_fun"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="24dp" />
 
                 <TextView

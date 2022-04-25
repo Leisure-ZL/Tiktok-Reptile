@@ -32,6 +32,12 @@ interface ApiService {
     @GET("/user/like")
     suspend fun getUserByLike(@Query("size") size: Int): BaseResponse<List<User>>
 
+    @GET("/user")
+    suspend fun getUser(@QueryMap map: Map<String,String>): BaseResponse<User>
+
+    @GET("/user/vague")
+    suspend fun getUserByVague(@Query("s") s: String): BaseResponse<List<User>>
+
 
     /**
      * video

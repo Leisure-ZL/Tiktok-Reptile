@@ -19,7 +19,8 @@ class HomeViewModel : ViewModel() {
      * funList Data
      * */
     val funData: List<HomeFun> by lazy {
-        listOf(HomeFun(R.drawable.ic_user_rank, "达人榜"), HomeFun(R.drawable.ic_video_rank, "热播榜"))
+        listOf(HomeFun(R.drawable.ic_user_rank, "达人榜"), HomeFun(R.drawable.ic_video_rank, "热播榜"),
+        HomeFun(R.drawable.ic_collect, "我的收藏") ,HomeFun(R.drawable.ic_tiktok, "我的抖音"))
     }
 
 

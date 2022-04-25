@@ -26,6 +26,23 @@ public class DataUtil {
         return res;
     }
 
+    public static String numToString(long num){
+        long t = 0;
+        if(num / 100000000 > 0){
+            t = num % 100000000 / 1000000;
+            num /= 100000000;
+            return num + "." + t + "亿";
+        }else if (num / 10000 > 0){
+            t = num % 10000 / 100;
+            num /= 10000;
+            return num + "." + t + "万";
+        }else{
+            return String.valueOf(num);
+        }
+
+
+    }
+
 
 
 }

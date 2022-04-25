@@ -74,4 +74,18 @@ public class VideoRaw {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "VideoRaw{" +
+                "id=" + id +
+                ", videoName='" + videoName + '\'' +
+                ", likeNum='" + likeNum + '\'' +
+                ", commentNum='" + commentNum + '\'' +
+                ", collectNum='" + collectNum + '\'' +
+                ", userName='" + userName + '\'' +
+                ", url='" + url + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                '}';
+    }
 }

@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.swu.reptile_android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许应用程序联网（必须） -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许访问WiFi网络状态信息（必须） -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许读取手机状态（必须） -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许访问网络状态（必须） -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许写手机存储（必须） -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" /> <!-- GUI自动填充验证码功能（非必须） -->
+    <uses-permission android:name="android.permission.READ_SMS" /> <!-- 从短信中读取验证码接口（非必须） -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -14,26 +19,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReptileAndroid">
-        <activity android:name=".ui.setting.SettingActivity"></activity>
+        <activity android:name=".ui.main.RankActivity"></activity>
+        <activity android:name=".ui.user.UserSearchActivity" />
+        <activity android:name=".ui.video.VideoDetailActivity" />
+        <activity android:name=".ui.main.DetailActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
 
         <meta-data
             android:name="cn.edu.swu.reptile_android.utils.https.OkHttpAppGlideModule"
             android:value="AppGlideModule" />
 
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity"></activity>
+        <activity android:name=".ui.main.MainActivity">
+
+        </activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="standard">
-        </activity>
+            android:launchMode="standard"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

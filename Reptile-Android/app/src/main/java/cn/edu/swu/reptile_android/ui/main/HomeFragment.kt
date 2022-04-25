@@ -1,5 +1,6 @@
 package cn.edu.swu.reptile_android.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
@@ -132,8 +134,12 @@ class HomeFragment : Fragment() {
 
         funAdapter.setOnItemClickListener(object: BaseAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Log.d("tag",position.toString())
-                //TODO:to intent
+                val intent = Intent(context, RankActivity::class.java)
+                when(position){
+                    0 -> intent.putExtra("arg", 0)
+                    1 -> intent.putExtra("arg", 1)
+                }
+                startActivity(intent)
             }
         })
         funRv.adapter = funAdapter
@@ -169,6 +175,18 @@ class HomeFragment : Fragment() {
                        view.findViewById<TextView>(R.id.tv_follower_incremental).text =
                            DataUtil.numToString(user.followerIncremental)
                    }
+                    //点击item
+                    userRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val user = it.data[position]
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("dest", "user")
+                            intent.putExtra("key", "id")
+                            intent.putExtra("value", user.id)
+                            startActivity(intent)
+                        }
+                    })
+
                     userRankRv.adapter = userRankAdapter
                     userRankRv.layoutManager = LinearLayoutManager(context)
                     userRankAdapter.notifyDataSetChanged()
@@ -198,6 +216,15 @@ class HomeFragment : Fragment() {
 //                            DataUtil.numToString(video.likeIncremental)
 
                     }
+                    //点击item
+                    videoRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val video = it.data[position]
+                            val intent = Intent(context, VideoDetailActivity::class.java)
+                            intent.putExtra("url", video.videoUrl)
+                            startActivity(intent)
+                        }
+                    })
                     videoRankRv.adapter = videoRankAdapter
                     videoRankRv.layoutManager = LinearLayoutManager(context)
                     videoRankAdapter.notifyDataSetChanged()

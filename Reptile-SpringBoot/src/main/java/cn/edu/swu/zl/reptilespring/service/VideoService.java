@@ -9,13 +9,19 @@ public interface VideoService {
 
     List<VideoRaw> getAll();
 
-    List<Video> getVideoRankByIncremental();
+    List<Video> getVideoByLikeInc(int size);
 
-    List<VideoRaw> getVideoRankByLike();
+    List<Video> getVideoByLike(int size);
 
-    List<VideoRaw> getVideoRankByComment();
+    List<Video> getVideoByComment(int size);
 
-    List<VideoRaw> getVideoRankByCollect();
+    List<Video> getVideoByCollect(int size);
+
+    List<Video> getVideoByCommentInc(int size);
+
+    List<Video> getVideoByCollectInc(int size);
+
+
 
 
 }

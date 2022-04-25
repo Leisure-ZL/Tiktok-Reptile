@@ -29,11 +29,11 @@ public class ApplicationListenerInitialize implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //init inc table
-        //initUserIncTable();
-      //  alarmTask.updateUserIncremental();
+      //  initUserIncTable();
+       // alarmTask.updateUserIncremental();
 
-      //  initVideoIncTable();
-       // alarmTask.updateVideoIncremental();
+     //   initVideoIncTable();
+      //  alarmTask.updateVideoIncremental();
     }
 
     private void initUserIncTable(){

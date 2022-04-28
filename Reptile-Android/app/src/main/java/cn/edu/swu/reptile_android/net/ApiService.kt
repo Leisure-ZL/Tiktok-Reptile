@@ -4,6 +4,7 @@ import cn.edu.swu.reptile_android.base.BaseRequest
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
 import cn.edu.swu.reptile_android.model.entity.User
+import cn.edu.swu.reptile_android.model.entity.UserCollect
 import cn.edu.swu.reptile_android.model.entity.Video
 import retrofit2.Call
 import retrofit2.http.*
@@ -38,6 +39,20 @@ interface ApiService {
     @GET("/user/vague")
     suspend fun getUserByVague(@Query("s") s: String): BaseResponse<List<User>>
 
+    @POST("/user/collect")
+    suspend fun collectUser(@Body req: BaseRequest<UserCollect>): BaseResponse<String>
+
+    @POST("/user/un_collect")
+    suspend fun unCollectUser(@Body req: BaseRequest<UserCollect>): BaseResponse<String>
+
+    @GET("/user/collect/list")
+    suspend fun getCollectList(@Query("id") id: Int): BaseResponse<List<UserCollect>>
+
+    @GET("/user/collect/count")
+    suspend fun getCollectCount(@Query("id") id: Int): BaseResponse<Int>
+
+    @POST("/user/collect/is")
+    suspend fun isCollect(@Body req: BaseRequest<UserCollect>): BaseResponse<Boolean>
 
     /**
      * video

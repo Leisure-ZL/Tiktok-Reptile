@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginPhoneFragment"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_login"
+        android:textSize="32sp"
+        android:id="@+id/title"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="96dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:id="@+id/in_phone">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:hint="@string/phone_num"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/in_verity"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_below="@id/in_phone"
+        android:layout_marginTop="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_verity"
+            android:inputType="number"
+            android:hint="@string/Verification"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_verification"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/in_verity"
+        android:layout_marginTop="24dp"
+        android:background="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/verity"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/btn_verification"
+        android:layout_marginTop="24dp"
+        android:background="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        app:backgroundTint="#D84F0F"
+        app:cornerRadius="12dp" />
+
+
+</RelativeLayout>

@@ -6,6 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
+import cn.edu.swu.reptile_android.ui.my.MyFragment
 import cn.edu.swu.reptile_android.ui.user.UserFragment
 import cn.edu.swu.reptile_android.ui.video.VideoFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

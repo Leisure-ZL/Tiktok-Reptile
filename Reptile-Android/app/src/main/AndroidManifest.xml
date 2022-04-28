@@ -19,26 +19,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReptileAndroid">
-        <activity android:name=".ui.main.RankActivity"></activity>
+        <activity android:name=".ui.my.MyCollectActivity"></activity>
+        <activity android:name=".ui.main.RankActivity" />
         <activity android:name=".ui.user.UserSearchActivity" />
         <activity android:name=".ui.video.VideoDetailActivity" />
         <activity android:name=".ui.main.DetailActivity" />
-        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.my.SettingActivity" />
 
         <meta-data
             android:name="cn.edu.swu.reptile_android.utils.https.OkHttpAppGlideModule"
             android:value="AppGlideModule" />
 
-        <activity android:name=".ui.login.LoginActivity" >
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity">
-
-        </activity>
+        <activity android:name=".ui.main.MainActivity"></activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

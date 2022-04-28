@@ -1,6 +1,7 @@
 package cn.edu.swu.zl.reptilespring.service;
 
 import cn.edu.swu.zl.reptilespring.entity.User;
+import cn.edu.swu.zl.reptilespring.entity.UserCollect;
 import cn.edu.swu.zl.reptilespring.entity.UserRaw;
 
 import java.util.List;
@@ -31,5 +32,22 @@ public interface UserService {
 
     //通过关键字模糊查询
     List<User> getUserByVague(String s);
+
+    //添加用户收藏
+    boolean collectUser(UserCollect userCollect);
+
+    //取消用户收藏
+    boolean unCollectUser(UserCollect userCollect);
+
+    //获取收藏数
+    int getCollectCount(int id);
+
+    //获取用户收藏列表
+    List<UserCollect> getCollectList(int id);
+
+    //判断表中是否存在记录（是否被收藏）
+    boolean isCollect(UserCollect userCollect);
+
+
 
 }

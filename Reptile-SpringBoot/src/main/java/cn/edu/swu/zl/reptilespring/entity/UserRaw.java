@@ -3,7 +3,7 @@ package cn.edu.swu.zl.reptilespring.entity;
 public class UserRaw {
 
     //Id
-    private int id;
+    private String id;
     //博主昵称
     private String nickname;
     //粉丝数
@@ -13,11 +13,11 @@ public class UserRaw {
     //主页链接
     private String link;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

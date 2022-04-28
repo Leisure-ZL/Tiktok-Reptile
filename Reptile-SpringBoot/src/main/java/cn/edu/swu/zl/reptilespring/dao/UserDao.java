@@ -1,6 +1,7 @@
 package cn.edu.swu.zl.reptilespring.dao;
 
 import cn.edu.swu.zl.reptilespring.entity.User;
+import cn.edu.swu.zl.reptilespring.entity.UserCollect;
 import cn.edu.swu.zl.reptilespring.entity.UserRaw;
 import cn.edu.swu.zl.reptilespring.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,12 +169,51 @@ public class UserDao {
 
 
     /**
+     * user_collect
+     * */
+    public boolean collectUser(UserCollect userCollect){
+        String sql = "select * from user where id="+userCollect.getCollectUserId();
+        String sql2 = "insert into user_collect(user_id,collect_user_id,nickname,follower_count,head_img)" +
+                " values(?,?,?,?,?)";
+        User user = jdbcTemplate.query(sql, new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return pkgUser(rs);
+            }
+        }).get(0);
+        int res = jdbcTemplate.update(sql2, userCollect.getUserId(), userCollect.getCollectUserId(), user.getNickname(),
+                user.getFollowerCount(), user.getHeadImg());
+        return res > 0;
+    }
+
+    public boolean unCollectUser(UserCollect userCollect){
+        String sql = "delete from user_collect where user_id="+userCollect.getUserId()+" and collect_user_id="+
+                userCollect.getCollectUserId();
+        int res = jdbcTemplate.update(sql);
+        return res > 0;
+    }
+
+    public List<UserCollect> getCollectList(int id){
+        String sql = "select * from user_collect where user_id="+id;
+        List<UserCollect> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper(UserCollect.class));
+        return list;
+    }
+
+    public boolean isCollect(UserCollect userCollect) {
+        String sql = "select * from user_collect where user_id="+userCollect.getUserId()+" and collect_user_id="+
+                userCollect.getCollectUserId();
+        List<UserCollect> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper(UserCollect.class));
+        return list.size() > 0;
+    }
+
+
+    /**
      * base
      * */
 
     private User pkgUser(ResultSet rs) throws SQLException {
         User user = new User();
-        user.setId(rs.getInt("id"));
+        user.setId(rs.getString("id"));
         user.setNickname(rs.getString("nickname"));
         user.setFollowerCount(DataUtil.numToString(rs.getLong("follower_count")));
         user.setLikeCount(DataUtil.numToString(rs.getLong("like_count")));

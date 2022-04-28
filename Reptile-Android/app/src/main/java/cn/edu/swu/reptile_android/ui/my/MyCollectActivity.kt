@@ -1,0 +1,94 @@
+package cn.edu.swu.reptile_android.ui.my
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import cn.edu.swu.reptile_android.R
+import cn.edu.swu.reptile_android.base.BaseResponse
+import cn.edu.swu.reptile_android.databinding.ItemRvCollectUserBinding
+import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
+import cn.edu.swu.reptile_android.model.entity.User
+import cn.edu.swu.reptile_android.model.entity.UserCollect
+import cn.edu.swu.reptile_android.ui.base.BaseActivity
+import cn.edu.swu.reptile_android.ui.base.BaseAdapter
+import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.main.DetailActivity
+import cn.edu.swu.reptile_android.utils.DataUtil
+import cn.edu.swu.reptile_android.viewmodel.MyViewModel
+import cn.edu.swu.reptile_android.viewmodel.UserViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+
+class MyCollectActivity : BaseActivity() {
+
+    lateinit var rv: RecyclerView
+    val that = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_my_collect)
+
+        findViewById<TextView>(R.id.top_bar_title).text = "我的收藏"
+
+        rv = findViewById(R.id.rv)
+
+        val id = intent.getIntExtra("id", 0)
+
+        val vm = MyViewModel()
+        vm.getCollectList(id)
+
+        val observer = Observer<BaseResponse<List<UserCollect>>> {
+            if (it != null) {
+                if (it.code != 200) {
+                    Toast.makeText(this, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    val userRankAdapter =
+                        BindingAdapter(R.layout.item_rv_collect_user, it.data) { view, user ->
+                            val binding: ItemRvCollectUserBinding? =
+                                DataBindingUtil.getBinding(view)
+                            if (binding != null) {
+                                binding.user = user
+                                binding.executePendingBindings()
+                            }
+                            //头像
+                            val roundedCorners = RoundedCorners(60)
+                            val options = RequestOptions.bitmapTransform(roundedCorners)
+                            Glide.with(view)
+                                .load(R.drawable.test_head_user)
+                                .apply(options)
+                                .into(view.findViewById(R.id.iv_head))
+                        }
+                    userRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val user = it.data[position]
+                            val intent = Intent(that, DetailActivity::class.java)
+                            intent.putExtra("dest", "user")
+                            intent.putExtra("key", "id")
+                            intent.putExtra("value", user.collectUserId.toString())
+                            startActivity(intent)
+                        }
+                    })
+                    rv.adapter = userRankAdapter
+                    rv.layoutManager = LinearLayoutManager(this)
+                    userRankAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        vm.collectList.observe(this, observer)
+
+    }
+
+    fun clickBack(view: View) {
+        onBackPressed()
+    }
+
+}

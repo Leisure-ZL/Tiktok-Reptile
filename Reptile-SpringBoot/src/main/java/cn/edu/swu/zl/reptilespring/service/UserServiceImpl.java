@@ -2,6 +2,7 @@ package cn.edu.swu.zl.reptilespring.service;
 
 import cn.edu.swu.zl.reptilespring.dao.UserDao;
 import cn.edu.swu.zl.reptilespring.entity.User;
+import cn.edu.swu.zl.reptilespring.entity.UserCollect;
 import cn.edu.swu.zl.reptilespring.entity.UserRaw;
 import cn.edu.swu.zl.reptilespring.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUserByVague(String s) {
         return userDao.getUserByVague(s);
+    }
+
+    @Override
+    public boolean collectUser(UserCollect userCollect) {
+        boolean res = userDao.collectUser(userCollect);
+        return res;
+    }
+
+    @Override
+    public boolean unCollectUser(UserCollect userCollect) {
+        boolean res = userDao.unCollectUser(userCollect);
+        return res;
+    }
+
+
+    @Override
+    public int getCollectCount(int id) {
+        return userDao.getCollectList(id).size();
+    }
+
+
+    @Override
+    public List<UserCollect> getCollectList(int id) {
+        return userDao.getCollectList(id);
+    }
+
+    @Override
+    public boolean isCollect(UserCollect userCollect) {
+        return userDao.isCollect(userCollect);
     }
 
 

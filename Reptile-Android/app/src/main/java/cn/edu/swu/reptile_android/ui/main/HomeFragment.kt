@@ -1,5 +1,6 @@
 package cn.edu.swu.reptile_android.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.my.MyCollectActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
@@ -134,10 +136,16 @@ class HomeFragment : Fragment() {
 
         funAdapter.setOnItemClickListener(object: BaseAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val intent = Intent(context, RankActivity::class.java)
+                var intent = Intent(context, RankActivity::class.java)
                 when(position){
                     0 -> intent.putExtra("arg", 0)
                     1 -> intent.putExtra("arg", 1)
+                    2 -> {
+                        val sp = activity?.getSharedPreferences("account", Context.MODE_PRIVATE)
+                        val userId = sp?.getInt("id", 0)
+                        intent = Intent(context, MyCollectActivity::class.java)
+                        intent.putExtra("id", userId)
+                    }
                 }
                 startActivity(intent)
             }

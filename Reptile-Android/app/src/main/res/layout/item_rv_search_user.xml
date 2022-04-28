@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="user"
+            type="cn.edu.swu.reptile_android.model.entity.User" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:padding="8dp"
+        android:background="@drawable/border_underline">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/head_img"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/tv_title"
+            android:text="@{user.nickname}"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/head_img"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/head_img"
+            android:layout_below="@id/tv_title"
+            android:id="@+id/tv_follower_text"
+            android:text="@string/follower_text_" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_follower_text"
+            android:layout_below="@id/tv_title"
+            android:text="@{user.followerCount}"
+            android:layout_marginLeft="4dp"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+</layout>

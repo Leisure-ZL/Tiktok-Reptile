@@ -18,7 +18,9 @@ import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
+import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
@@ -76,6 +78,18 @@ class RankActivity : BaseActivity() {
                                 binding.executePendingBindings()
                             }
                         }
+                    //点击item
+                    videoRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            //保存当前需要显示的数据
+                            val app = application as BaseApplication
+                            app.detailList = it.data
+                            val intent = Intent(that, VideoDetailActivity::class.java)
+                            //传递位置
+                            intent.putExtra("position", position)
+                            startActivity(intent)
+                        }
+                    })
                     rv.adapter = videoRankAdapter
                     rv.layoutManager = LinearLayoutManager(this)
                     videoRankAdapter.notifyDataSetChanged()

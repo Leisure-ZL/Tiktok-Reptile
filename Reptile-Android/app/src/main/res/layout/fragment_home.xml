@@ -59,7 +59,6 @@
                         android:textSize="24sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_alignParentRight="true"
                         android:text="@string/user_title"
                         android:layout_alignParentEnd="true" />
                     <TextView
@@ -68,7 +67,6 @@
                         android:id="@+id/tv_user_more"
                         android:text="@string/more"
                         android:layout_marginTop="8dp"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -90,7 +88,6 @@
                         android:textSize="24sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_alignParentRight="true"
                         android:text="@string/video_title"
                         android:layout_alignParentEnd="true" />
                     <TextView
@@ -99,7 +96,6 @@
                         android:id="@+id/tv_video_more"
                         android:text="@string/more"
                         android:layout_marginTop="8dp"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true" />
 
                     <androidx.recyclerview.widget.RecyclerView

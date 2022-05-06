@@ -1,5 +1,6 @@
 package cn.edu.swu.reptile_android.ui.video
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
 import cn.edu.swu.reptile_android.databinding.ItemRvFragmentVideoBinding
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
+import cn.edu.swu.reptile_android.ui.base.BaseAdapter
+import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.base.DropdownMenu
 import cn.edu.swu.reptile_android.utils.DataUtil
@@ -30,6 +33,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 
 class VideoFragment : Fragment() {
 
+    val that = this
 
     private val vm = VideoViewModel()
 
@@ -121,6 +125,18 @@ class VideoFragment : Fragment() {
                                 binding.executePendingBindings()
                             }
                         }
+                    //点击item
+                    videoRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            //保存当前需要显示的数据
+                            val app = that.activity?.application as BaseApplication
+                            app.detailList = it.data
+                            val intent = Intent(context, VideoDetailActivity::class.java)
+                            //传递位置
+                            intent.putExtra("position", position)
+                            startActivity(intent)
+                        }
+                    })
                     rv.adapter = videoRankAdapter
                     rv.layoutManager = LinearLayoutManager(context)
                     videoRankAdapter.notifyDataSetChanged()

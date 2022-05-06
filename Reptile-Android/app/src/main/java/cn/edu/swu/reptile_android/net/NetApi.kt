@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object NetApi{
 
-    private const val base_url = "http://192.168.0.1:8080"
+    private const val base_url = "http://119.3.77.254:8000"
 
     fun getRetrofit(): Retrofit{
         return Retrofit.Builder()

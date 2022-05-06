@@ -23,11 +23,13 @@ import cn.edu.swu.reptile_android.model.entity.HomeFun
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
+import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.my.MyCollectActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
+import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -43,11 +45,15 @@ class HomeFragment : Fragment() {
 
     private val vm = HomeViewModel()
 
+    val that = this
+
   //  private lateinit var dataBinding: FragmentHomeBinding
 
     private lateinit var refresh: RefreshLayout
     private lateinit var banner: Banner<BannerImg, BannerImageAdapter<BannerImg>>
     private lateinit var funRv: RecyclerView
+    private lateinit var userMore: TextView
+    private lateinit var videoMore: TextView
 
     private lateinit var userRankRv: RecyclerView
     private lateinit var videoRankRv: RecyclerView
@@ -83,11 +89,13 @@ class HomeFragment : Fragment() {
 
         //初始化userRank
         userRankRv = view.findViewById(R.id.rv_rank_user)
+        userMore = view.findViewById(R.id.tv_user_more)
         initUserRank()
 
 
         //初始化videoRank
         videoRankRv = view.findViewById(R.id.rv_rank_video)
+        videoMore = view.findViewById(R.id.tv_video_more)
         initVideoRank()
 
         return view
@@ -202,6 +210,13 @@ class HomeFragment : Fragment() {
             }
         }
         vm.userData.observe(viewLifecycleOwner,observer)
+
+        userMore.setOnClickListener {
+            val intent = Intent(context, RankActivity::class.java)
+            intent.putExtra("arg", 0)
+            startActivity(intent)
+        }
+
     }
 
     private fun initVideoRank() {
@@ -227,9 +242,12 @@ class HomeFragment : Fragment() {
                     //点击item
                     videoRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
-                            val video = it.data[position]
+                            //保存当前需要显示的数据
+                            val app = that.activity?.application as BaseApplication
+                            app.detailList = it.data
                             val intent = Intent(context, VideoDetailActivity::class.java)
-                            intent.putExtra("url", video.videoUrl)
+                            //传递位置
+                            intent.putExtra("position", position)
                             startActivity(intent)
                         }
                     })
@@ -241,6 +259,11 @@ class HomeFragment : Fragment() {
         }
         vm.videoData.observe(viewLifecycleOwner,observer)
 
+        videoMore.setOnClickListener {
+            val intent = Intent(context, RankActivity::class.java)
+            intent.putExtra("arg", 1)
+            startActivity(intent)
+        }
 
     }
 

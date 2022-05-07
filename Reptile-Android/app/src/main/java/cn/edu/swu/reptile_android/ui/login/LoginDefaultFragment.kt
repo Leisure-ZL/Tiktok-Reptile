@@ -57,7 +57,10 @@ class LoginDefaultFragment : Fragment() {
                     edit.putInt("id", it.data.id)
                     edit.putString("username", it.data.username)
                     edit.putString("password", it.data.password)
-                    edit.putString("nickname", it.data.nickname)
+                    //如果用户未设置昵称，使用用户名
+                    if (it.data.nickname == "默认用户"){
+                        edit.putString("nickname", it.data.username)
+                    }
                     edit.putString("headImg", it.data.headImg)
                     edit.apply()
                     //跳转

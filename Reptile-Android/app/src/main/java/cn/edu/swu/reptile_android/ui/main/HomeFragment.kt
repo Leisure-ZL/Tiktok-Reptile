@@ -3,14 +3,13 @@ package cn.edu.swu.reptile_android.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,8 +28,8 @@ import cn.edu.swu.reptile_android.ui.my.MyCollectActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
-import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -63,8 +62,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
      //   dataBinding = DataBindingUtil.inflate(inflater,
        //     R.layout.fragment_home, container, false);
@@ -85,7 +84,7 @@ class HomeFragment : Fragment() {
         initFunList()
 
         //初始化今日大盘
-        //TODO
+        initLineChart()
 
         //初始化userRank
         userRankRv = view.findViewById(R.id.rv_rank_user)
@@ -101,6 +100,44 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    private fun initLineChart() {
+
+//        var xLableCount = 7
+//        var xRangeMaximum = xLableCount - 1
+//
+//        val netLineList: List<Map.Entry<*, *>> = ArrayList()
+//        val netDateList: List<String> = ArrayList()
+//        val lineChart = LineChart(context)
+//        LineChartUtils.initChart(lineChart, true, false, false)
+//
+//        var s: String?
+//        val dateFormat1 = SimpleDateFormat("MM-dd")
+//        val c: Calendar = Calendar.getInstance()
+//        val currentDate: String = dateFormat1.format(c.getTime())
+//        netDateList.add(currentDate)
+//        for (i in 1..6) {
+//            s = formatDatas(i)
+//            netDateList.add(s)
+//        }
+//        Collections.reverse(netDateList)
+//
+//        val lineFloat = floatArrayOf(11f, 15f, 16f, 17f, 16f, 16f, 12f)
+//        for (i in 0 until netDateList.size()) {
+////            netLineList.add(new Entry((float) i, (float) Math.random() * 80));
+//            netLineList.add(
+//                MutableMap.MutableEntry<Any?, Any?>(
+//                    i.toFloat(),
+//                    lineFloat[i]
+//                )
+//            )
+//        }
+//
+//        xLableCount = if (netDateList.size + 3 > 7) 7 else netDateList.size + 3
+//        xRangeMaximum = xLableCount - 1
+//
+//        LineChartUtils.setXAxis(lineChart, xLableCount, netDateList.size, xRangeMaximum)
+//        LineChartUtils.notifyDataSetChanged(lineChart, netLineList, netDateList)
+    }
 
 
     private fun initRefresh() {
@@ -116,19 +153,26 @@ class HomeFragment : Fragment() {
 
 
     private fun initBanner(){
-        val bannerImgs: List<BannerImg> = listOf(BannerImg("http://www.swu.edu.cn/images/notice/378.jpg")
-                , BannerImg("http://www.swu.edu.cn/images/notice/377.jpg"))
+        val bannerImgs: List<BannerImg> = listOf(
+            BannerImg("http://www.swu.edu.cn/images/notice/378.jpg"),
+            BannerImg("http://www.swu.edu.cn/images/notice/377.jpg")
+        )
 
         banner.addBannerLifecycleObserver(this)
                 .setIndicator(CircleIndicator(context))
                 .setLoopTime(5000) //滑动间隔时间
-                .setAdapter(object: BannerImageAdapter<BannerImg>(bannerImgs) {
-                    override fun onBindView(holder: BannerImageHolder?, data: BannerImg?, position: Int, size: Int) {
+                .setAdapter(object : BannerImageAdapter<BannerImg>(bannerImgs) {
+                    override fun onBindView(
+                        holder: BannerImageHolder?,
+                        data: BannerImg?,
+                        position: Int,
+                        size: Int
+                    ) {
                         if (holder != null && data != null) {
                             Glide.with(holder.itemView)
-                                    .load(data.imgUrl)
-                                    .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
-                                    .into(holder.imageView)
+                                .load(data.imgUrl)
+                                .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+                                .into(holder.imageView)
                         }
                     }
                 })
@@ -142,10 +186,10 @@ class HomeFragment : Fragment() {
             Glide.with(view).load(homeFun.img).into(view.findViewById(R.id.iv_icon))
         }
 
-        funAdapter.setOnItemClickListener(object: BaseAdapter.OnItemClickListener {
+        funAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 var intent = Intent(context, RankActivity::class.java)
-                when(position){
+                when (position) {
                     0 -> intent.putExtra("arg", 0)
                     1 -> intent.putExtra("arg", 1)
                     2 -> {
@@ -173,18 +217,16 @@ class HomeFragment : Fragment() {
                 if(it.code != 200){
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
                 }else{
-                   val userRankAdapter = BindingAdapter(R.layout.item_rv_rank_user, it.data) {
-                       view, user ->
+                   val userRankAdapter = BindingAdapter(R.layout.item_rv_rank_user, it.data) { view, user ->
                        val binding: ItemRvRankUserBinding? = DataBindingUtil.getBinding(view)
                        if (binding != null) {
                            binding.user = user
                            binding.executePendingBindings()
                        }
                        //头像
-                       val roundedCorners = RoundedCorners(60)
-                       val options = RequestOptions.bitmapTransform(roundedCorners)
+                       val options = RequestOptions.bitmapTransform(CircleCrop())
                        Glide.with(view)
-                           .load(R.drawable.test_head_user)
+                           .load(user.headImg)
                            .apply(options)
                            .into(view.findViewById(R.id.iv_head))
                        //粉丝增量
@@ -192,7 +234,8 @@ class HomeFragment : Fragment() {
                            DataUtil.numToString(user.followerIncremental)
                    }
                     //点击item
-                    userRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                    userRankAdapter.setOnItemClickListener(object :
+                        BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             val user = it.data[position]
                             val intent = Intent(context, DetailActivity::class.java)
@@ -209,7 +252,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        vm.userData.observe(viewLifecycleOwner,observer)
+        vm.userData.observe(viewLifecycleOwner, observer)
 
         userMore.setOnClickListener {
             val intent = Intent(context, RankActivity::class.java)
@@ -227,8 +270,7 @@ class HomeFragment : Fragment() {
                 if(it.code != 200){
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
                 }else{
-                    val videoRankAdapter = BindingAdapter(R.layout.item_rv_rank_video, it.data) {
-                            view, video ->
+                    val videoRankAdapter = BindingAdapter(R.layout.item_rv_rank_video, it.data) { view, video ->
                         val binding: ItemRvRankVideoBinding? = DataBindingUtil.getBinding(view)
                         if (binding != null) {
                             binding.video = video
@@ -240,7 +282,8 @@ class HomeFragment : Fragment() {
 
                     }
                     //点击item
-                    videoRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                    videoRankAdapter.setOnItemClickListener(object :
+                        BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             //保存当前需要显示的数据
                             val app = that.activity?.application as BaseApplication
@@ -257,7 +300,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        vm.videoData.observe(viewLifecycleOwner,observer)
+        vm.videoData.observe(viewLifecycleOwner, observer)
 
         videoMore.setOnClickListener {
             val intent = Intent(context, RankActivity::class.java)

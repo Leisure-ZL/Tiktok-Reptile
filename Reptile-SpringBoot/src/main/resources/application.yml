@@ -1,13 +1,16 @@
 #����Դ������Ϣ
 server:
-  port: 8080
-  address: 192.168.0.1
+  port: 8000
+#  address: 119.3.77.254
+#  address: 192.168.0.1
+  address: 0.0.0.0
+
 
 spring:
   datasource:
     username: root
     password: ZLzhouliang0.
-    url: jdbc:mysql://127.0.0.1:3306/Reptile
+    url: jdbc:mysql://127.0.0.1:3306/reptile
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 

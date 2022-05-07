@@ -109,7 +109,7 @@ public class VideoDao {
     }
 
 
-    /*
+    /**
      * video_inc
      * */
 
@@ -126,15 +126,19 @@ public class VideoDao {
     }
 
     public List<Video> getVideoByLeastFloInc(){
-        String sql = "select * from video_inc order by 'like_incremental' asc limit 1;";
+        String sql = "select * from video_inc order by 'like_incremental' asc ;";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper(Video.class));
     }
 
     public boolean insertVideoToVideoIncTab(Video video) {
-        String sql = "insert into video_inc values(?,?,?,?,?,?,?,?,?,?,?);";
+        String sql = "insert into video_inc values(?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+                "like_num=?,comment_num=?,collect_num=?,like_incremental=?,comment_incremental=?,collect_incremental=?";
         Object[] objects = new Object[]{
-                video.getId(),video.getVideoName(),video.getLikeNum(),video.getCommentNum(),video.getCollectNum(),
+                video.getId(),video.getVideoName(),DataUtil.stringToNum(video.getLikeNum()),
+                DataUtil.stringToNum(video.getCommentNum()),DataUtil.stringToNum(video.getCollectNum()),
                 video.getUserName(),video.getVideoUrl(),video.getUrl(),(int)video.getLikeIncremental(),
+                (int)video.getCommentIncremental(),(int)video.getCollectIncremental(),DataUtil.stringToNum(video.getLikeNum()),
+                DataUtil.stringToNum(video.getCommentNum()),DataUtil.stringToNum(video.getCollectNum()),(int)video.getLikeIncremental(),
                 (int)video.getCommentIncremental(),(int)video.getCollectIncremental()
         };
         int res = jdbcTemplate.update(sql,objects);

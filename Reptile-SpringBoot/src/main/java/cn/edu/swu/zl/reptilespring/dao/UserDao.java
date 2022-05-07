@@ -156,17 +156,28 @@ public class UserDao {
     }
 
     public List<User> getUserByLeastFloInc(){
-        String sql = "select * from user_inc order by 'follower_incremental' asc limit 1;";
+        String sql = "select * from user_inc order by 'follower_incremental' asc;";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper(User.class));
     }
 
     public boolean insertUserToUserIncTab(User user) {
-        String sql = "insert into user_inc values(?,?,?,?,?,?,?,?);";
-        int res = jdbcTemplate.update(sql,user.getId(),user.getNickname(),user.getFollowerCount(),user.getLikeCount(),
-                user.getLink(),user.getHeadImg(),(int)user.getFollowerIncremental(),(int)user.getLikeIncremental());
+        String sql = "insert into user_inc values(?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+                "follower_count=?,like_count=?,follower_incremental=?," +
+                "like_incremental=?";
+        int res = jdbcTemplate.update(sql,user.getId(),user.getNickname(),DataUtil.stringToNum(user.getFollowerCount())
+                ,DataUtil.stringToNum(user.getLikeCount()), user.getLink(),user.getHeadImg(),
+                (int)user.getFollowerIncremental(),(int)user.getLikeIncremental(),
+                DataUtil.stringToNum(user.getFollowerCount()),DataUtil.stringToNum(user.getLikeCount()),
+                (int)user.getFollowerIncremental(),(int)user.getLikeIncremental());
         return res > 0;
     }
 
+    public boolean updateUserToIncTab(User user){
+        String sql = "update user_inc set follower_count=?,like_count=?,follower_incremental=?,like_incremental=? where id = ?;";
+        int res =jdbcTemplate.update(sql,user.getFollowerCount(),user.getLikeCount(),user.getFollowerIncremental(),
+                user.getLikeIncremental(),user.getId());
+        return res > 0;
+    }
 
     /**
      * user_collect

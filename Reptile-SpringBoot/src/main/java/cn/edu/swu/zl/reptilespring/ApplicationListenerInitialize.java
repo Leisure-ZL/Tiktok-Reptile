@@ -29,11 +29,11 @@ public class ApplicationListenerInitialize implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //init inc table
-      //  initUserIncTable();
+       // initUserIncTable();
        // alarmTask.updateUserIncremental();
 
-     //   initVideoIncTable();
-      //  alarmTask.updateVideoIncremental();
+       // initVideoIncTable();
+       // alarmTask.updateVideoIncremental();
     }
 
     private void initUserIncTable(){
@@ -45,7 +45,7 @@ public class ApplicationListenerInitialize implements ApplicationRunner {
     }
 
     private void initVideoIncTable(){
-        List<Video> list = videoDao.getVideoAll().subList(0,50);
+        List<Video> list = videoDao.getVideoAll().subList(0,100);
         for(Video e : list){
             videoDao.insertVideoToVideoIncTab(e);
         }

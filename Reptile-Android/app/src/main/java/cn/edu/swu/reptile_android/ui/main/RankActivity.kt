@@ -25,6 +25,7 @@ import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -120,10 +121,9 @@ class RankActivity : BaseActivity() {
                                 binding.executePendingBindings()
                             }
                             //头像
-                            val roundedCorners = RoundedCorners(60)
-                            val options = RequestOptions.bitmapTransform(roundedCorners)
+                            val options = RequestOptions.bitmapTransform(CircleCrop())
                             Glide.with(view)
-                                .load(R.drawable.test_head_user)
+                                .load(user.headImg)
                                 .apply(options)
                                 .into(view.findViewById(R.id.iv_head))
                             //粉丝增量

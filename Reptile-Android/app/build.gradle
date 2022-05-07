@@ -3,38 +3,11 @@ plugins {
     id 'kotlin-android'
 }
 apply plugin: 'com.mob.sdk'
-//
-//MobSDK {
-//    appKey ""
-//    appSecret ""
-//    SecVerify {}
-//}
 
 MobSDK {
     appKey "35c7fb3cdfac0"
     appSecret "867e27f594eeb210bcd2293b1594a699"
     SMSSDK {}
-    ShareSDK {
-        loopShare true
-        devInfo {
-            Wechat {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                userName "gh_afb25ac019c9"
-                path "pages/index/index.html?id=1"
-                withShareTicket true
-                miniprogramType 2
-            }
-            WechatMoments {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-            }
-            WechatFavorite {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-            }
-        }
-    }
 }
 
 android {
@@ -106,10 +79,10 @@ dependencies {
     //SmartRefresh
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
-//    implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
-
     //GSYVideoPlayer
     implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+    //MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 
 

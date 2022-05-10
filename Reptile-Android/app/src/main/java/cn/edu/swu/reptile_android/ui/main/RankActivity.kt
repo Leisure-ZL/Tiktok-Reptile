@@ -1,7 +1,6 @@
 package cn.edu.swu.reptile_android.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -12,21 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
-import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
-import cn.edu.swu.reptile_android.databinding.ItemRvFragmentVideoBinding
+import cn.edu.swu.reptile_android.databinding.*
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.ui.user.UserDetailActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 
@@ -43,16 +41,17 @@ class RankActivity : BaseActivity() {
         rv = findViewById(R.id.rv)
         refresh = findViewById<View>(R.id.refreshLayout) as RefreshLayout
 
-        refresh.finishRefresh(1000)
+        //执行刷新
+        refresh.autoRefresh()
 
-        when(intent.getIntExtra("arg", 0)){
-            0 -> loadUserRank()
-            1 -> loadVideoRank()
+        refresh.setOnRefreshListener {
+            when(intent.getIntExtra("arg", 0)){
+                0 -> loadUserRank()
+                1 -> loadVideoRank()
+            }
         }
+
     }
-
-
-
 
     fun clickBack(view: View){
         onBackPressed()
@@ -60,19 +59,19 @@ class RankActivity : BaseActivity() {
 
     private fun loadVideoRank() {
         findViewById<TextView>(R.id.top_bar_title).text = "热播榜"
-
         val vm = VideoViewModel()
         vm.getVideoByLikeInc()
 
         val observer = Observer<BaseResponse<List<Video>>> {
+            refresh.finishRefresh()
             if (it != null) {
                 if (it.code != 200) {
                     Toast.makeText(that, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
                         .show()
                 } else {
                     val videoRankAdapter =
-                        BindingAdapter(R.layout.item_rv_fragment_video, it.data) { view, video ->
-                            val binding: ItemRvFragmentVideoBinding? =
+                        BindingAdapter(R.layout.item_rv_more_video, it.data) { view, video ->
+                            val binding: ItemRvMoreVideoBinding? =
                                 DataBindingUtil.getBinding(view)
                             if (binding != null) {
                                 binding.video = video
@@ -102,19 +101,19 @@ class RankActivity : BaseActivity() {
 
     private fun loadUserRank() {
         findViewById<TextView>(R.id.top_bar_title).text = "达人榜"
-
         val vm = UserViewModel()
         vm.getUserByFollowerInc()
 
         val observer = Observer<BaseResponse<List<User>>> {
+            refresh.finishRefresh()
             if (it != null) {
                 if (it.code != 200) {
                     Toast.makeText(this, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
                         .show()
                 } else {
                     val userRankAdapter =
-                        BindingAdapter(R.layout.item_rv_fragment_user, it.data) { view, user ->
-                            val binding: ItemRvFragmentUserBinding? =
+                        BindingAdapter(R.layout.item_rv_more_user, it.data) { view, user ->
+                            val binding: ItemRvMoreUserBinding? =
                                 DataBindingUtil.getBinding(view)
                             if (binding != null) {
                                 binding.user = user
@@ -126,14 +125,11 @@ class RankActivity : BaseActivity() {
                                 .load(user.headImg)
                                 .apply(options)
                                 .into(view.findViewById(R.id.iv_head))
-                            //粉丝增量
-                            view.findViewById<TextView>(R.id.tv_follower_incremental).text =
-                                DataUtil.numToString(user.followerIncremental)
                         }
                     userRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             val user = it.data[position]
-                            val intent = Intent(that, DetailActivity::class.java)
+                            val intent = Intent(that, UserDetailActivity::class.java)
                             intent.putExtra("dest", "user")
                             intent.putExtra("key", "id")
                             intent.putExtra("value", user.id)

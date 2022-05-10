@@ -67,6 +67,19 @@ class VideoViewModel {
     }
 
 
+    /**
+     * search data
+     * */
+
+
+    val searchData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+
+    fun loadSearchData(string: String){
+        GlobalScope.launch(Dispatchers.Main) {
+            val resp = videoRepo.getVideoByVague(string)
+            searchData.value = resp
+        }
+    }
 
 
 

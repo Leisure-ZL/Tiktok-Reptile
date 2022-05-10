@@ -2,6 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="cn.edu.swu.reptile_android.utils.DataUtil"/>
+
         <variable
             name="user"
             type="cn.edu.swu.reptile_android.model.entity.User" />
@@ -21,8 +23,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:id="@+id/iv_head"
-            android:layout_marginRight="8dp"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="8dp" />
@@ -36,7 +36,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@id/iv_head"
             android:layout_toEndOf="@id/iv_head" />
 
         <TextView
@@ -45,7 +44,6 @@
             android:id="@+id/tv_follower_text"
             android:text="@string/follower_text"
             android:layout_below="@id/tv_nickname"
-            android:layout_toRightOf="@id/iv_head"
             android:layout_toEndOf="@id/iv_head" />
 
         <TextView
@@ -54,10 +52,8 @@
             android:id="@+id/tv_follower_count"
             android:text="@{user.followerCount}"
             android:textColor="@color/black"
-            android:layout_toRightOf="@id/tv_follower_text"
             android:layout_below="@id/tv_nickname"
             android:layout_toEndOf="@id/tv_follower_text"
-            android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp" />
 
         <TextView
@@ -66,7 +62,6 @@
             android:id="@+id/tv_like_text"
             android:text="@string/like_num"
             android:layout_below="@id/tv_follower_text"
-            android:layout_toRightOf="@id/iv_head"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@id/iv_head"/>
 
@@ -77,9 +72,7 @@
             android:text="@{user.likeCount}"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/tv_like_text"
             android:layout_below="@id/tv_follower_count"
-            android:layout_marginLeft="4dp"
             android:layout_toEndOf="@id/tv_like_text"
             android:layout_marginStart="4dp" />
 
@@ -90,15 +83,14 @@
             android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:text="@{DataUtil.INSTANCE.numToString(user.followerIncremental)}"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/follower_incremental"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/tv_follower_incremental" />
 

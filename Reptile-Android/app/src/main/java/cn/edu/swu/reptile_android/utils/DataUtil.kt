@@ -16,6 +16,16 @@ object DataUtil {
     }
 
 
+    public fun strNumToString(str: String): String {
+        val num = str.toInt()
+        return if(num / 10000 > 0){
+            val t = num % 10000 / 1000
+            val t2 = num / 10000
+            "${t2}.${t}w"
+        }else{
+            num.toString()
+        }
+    }
 
 
     public fun checkTel(tel: String): Boolean{

@@ -120,8 +120,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tv_url"
                 android:textSize="18sp"
-                android:text="@{user.link}"/>
+                android:clickable="true"
+                android:text="@{@string/https + user.link}"/>
 
         </LinearLayout>
 

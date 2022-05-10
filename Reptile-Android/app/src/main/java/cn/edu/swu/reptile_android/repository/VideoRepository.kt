@@ -35,4 +35,8 @@ class VideoRepository {
         return service.getVideoByCollect(size)
     }
 
+    suspend fun getVideoByVague(s: String): BaseResponse<List<Video>> {
+        return service.getVideoByVague(s)
+    }
+
 }

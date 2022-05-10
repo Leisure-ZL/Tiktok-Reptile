@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.base.DropdownMenu
+import cn.edu.swu.reptile_android.ui.user.UserSearchActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
@@ -59,6 +61,9 @@ class VideoFragment : Fragment() {
         refresh = view.findViewById<View>(R.id.refreshLayout) as RefreshLayout
         initRefresh()
 
+        //init search
+        initSearch(view)
+
         //init rv
         rv = view.findViewById(R.id.rv)
         initRv()
@@ -67,8 +72,16 @@ class VideoFragment : Fragment() {
         return view
     }
 
+    private fun initSearch(view: View) {
+        val searchBtn: LinearLayout = view.findViewById(R.id.top_search)
+
+        searchBtn.setOnClickListener {
+            val intent = Intent(context, VideoSearchActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private fun initRefresh() {
-        refresh.setRefreshHeader(ClassicsHeader(context))
         refresh.setOnRefreshListener {
             when (cur) {
                 0 -> vm.getVideoByLikeInc()
@@ -78,7 +91,6 @@ class VideoFragment : Fragment() {
                 4 -> vm.getVideoByComment()
                 5 -> vm.getVideoByCollect()
             }
-            refresh.finishRefresh(1000)
         }
     }
 
@@ -89,14 +101,7 @@ class VideoFragment : Fragment() {
         dropdownMenu.setOnItemSelectListener(object : DropdownMenu.OnItemSelectListener {
             override fun onItemSelect(position: Int) {
                 cur = position
-                when (position) {
-                    0 -> vm.getVideoByLikeInc()
-                    1 -> vm.getVideoByCommentInc()
-                    2 -> vm.getVideoByCollectInc()
-                    3 -> vm.getVideoByLike()
-                    4 -> vm.getVideoByComment()
-                    5 -> vm.getVideoByCollect()
-                }
+                refresh.autoRefresh()
             }
             override fun onDismiss() {
 
@@ -105,12 +110,9 @@ class VideoFragment : Fragment() {
     }
 
     private fun initRv() {
-
-        //请求数据
-
         vm.getVideoByLikeInc()
-
         val observer = Observer<BaseResponse<List<Video>>> {
+            refresh.finishRefresh()
             if (it != null) {
                 if (it.code != 200) {
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
@@ -123,6 +125,15 @@ class VideoFragment : Fragment() {
                             if (binding != null) {
                                 binding.video = video
                                 binding.executePendingBindings()
+                            }
+                            //单独处理
+                            if(cur == 0){
+                                view.findViewById<TextView>(R.id.tv_video_like).text =
+                                    DataUtil.strNumToString(video.likeNum)
+                                view.findViewById<TextView>(R.id.tv_video_comment).text =
+                                    DataUtil.strNumToString(video.commentNum)
+                                view.findViewById<TextView>(R.id.tv_video_collect).text =
+                                    DataUtil.strNumToString(video.collectNum)
                             }
                         }
                     //点击item
@@ -144,10 +155,7 @@ class VideoFragment : Fragment() {
             }
         }
         vm.rvData.observe(viewLifecycleOwner, observer)
-
     }
-
-
 
 
 }

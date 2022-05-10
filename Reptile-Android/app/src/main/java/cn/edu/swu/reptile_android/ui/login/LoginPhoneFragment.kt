@@ -17,6 +17,7 @@ import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
 import cn.edu.swu.reptile_android.ui.main.MainActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
+import cn.edu.swu.reptile_android.utils.TimeCount
 import cn.edu.swu.reptile_android.viewmodel.LoginViewModel
 import cn.smssdk.EventHandler
 import cn.smssdk.SMSSDK
@@ -31,7 +32,10 @@ class LoginPhoneFragment : Fragment() {
 
     lateinit var eh: EventHandler
     lateinit var vm: LoginViewModel
+    private var verityBtn: MaterialButton? = null
+    private var loginBtn: MaterialButton? = null
 
+    private lateinit var timeCount: TimeCount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +53,10 @@ class LoginPhoneFragment : Fragment() {
         val etPhone = view.findViewById<TextInputEditText>(R.id.et_phone)
         val etVerity = view.findViewById<TextInputEditText>(R.id.et_verity)
 
-        val verityBtn: MaterialButton = view.findViewById(R.id.btn_verification)
-        val loginBtn: MaterialButton = view.findViewById(R.id.btn_login)
+        verityBtn = view.findViewById(R.id.btn_verification)
+        loginBtn = view.findViewById(R.id.btn_login)
+
+        timeCount = TimeCount(60000, 1000, verityBtn)
 
         //观察loginInfo
         val observer = Observer<BaseResponse<Account>>() {
@@ -73,6 +79,9 @@ class LoginPhoneFragment : Fragment() {
                     }
                     edit.putString("headImg", it.data.headImg)
                     edit.apply()
+                    //关闭计时器
+                    timeCount.cancel()
+                    timeCount.onFinish()
                     //跳转
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
@@ -133,21 +142,22 @@ class LoginPhoneFragment : Fragment() {
         //注册一个事件回调监听，用于处理SMSSDK接口请求的结果
         SMSSDK.registerEventHandler(eh)
 
-        verityBtn.setOnClickListener {
+        verityBtn?.setOnClickListener {
             val phone = etPhone.text.toString()
 
             if (phone == "") {
                 Toast.makeText(context, "请输入手机号", Toast.LENGTH_SHORT).show()
             } else {
                 if (DataUtil.checkTel(phone)) {
-                    SMSSDK.getVerificationCode("86", phone);
+                    SMSSDK.getVerificationCode("86", phone)
+                    timeCount.start()
                 } else {
                     Toast.makeText(context, "请输入正确手机号", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        loginBtn.setOnClickListener {
+        loginBtn?.setOnClickListener {
             val verity = etVerity.text.toString()
             val phone = etPhone.text.toString()
 

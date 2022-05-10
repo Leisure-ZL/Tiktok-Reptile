@@ -83,7 +83,8 @@ dependencies {
     implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
     //MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
 
 

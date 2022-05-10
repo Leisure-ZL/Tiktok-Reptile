@@ -75,4 +75,7 @@ interface ApiService {
 
     @GET("/video/collect")
     suspend fun getVideoByCollect(@Query("size") size: Int): BaseResponse<List<Video>>
+
+    @GET("/video/vague")
+    suspend fun getVideoByVague(@Query("s") s: String): BaseResponse<List<Video>>
 }

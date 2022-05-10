@@ -1,7 +1,6 @@
 package cn.edu.swu.reptile_android.ui.my
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -13,16 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.databinding.ItemRvCollectUserBinding
-import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
-import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.UserCollect
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
-import cn.edu.swu.reptile_android.ui.main.DetailActivity
-import cn.edu.swu.reptile_android.utils.DataUtil
+import cn.edu.swu.reptile_android.ui.user.UserDetailActivity
 import cn.edu.swu.reptile_android.viewmodel.MyViewModel
-import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -70,7 +65,7 @@ class MyCollectActivity : BaseActivity() {
                     userRankAdapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             val user = it.data[position]
-                            val intent = Intent(that, DetailActivity::class.java)
+                            val intent = Intent(that, UserDetailActivity::class.java)
                             intent.putExtra("dest", "user")
                             intent.putExtra("key", "id")
                             intent.putExtra("value", user.collectUserId.toString())

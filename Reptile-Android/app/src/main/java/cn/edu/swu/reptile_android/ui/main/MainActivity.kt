@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
 
 
     private fun initNavAndPager() {
-        val vp2 = findViewById<ViewPager2>(R.id.vp2_main)
+        val vp2:ViewPager2 = findViewById<ViewPager2>(R.id.vp2_main)
         val navView = findViewById<BottomNavigationView>(R.id.btm_nav_view)
 
         //禁止滑动

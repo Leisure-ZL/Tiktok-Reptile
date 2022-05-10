@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="cn.edu.swu.reptile_android.utils.DataUtil"/>
+
         <variable
             name="video"
             type="cn.edu.swu.reptile_android.model.entity.Video" />
@@ -14,6 +17,8 @@
         android:layout_height="108dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:layout_marginBottom="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
@@ -28,7 +33,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
             android:layout_marginBottom="4dp"
             android:layout_alignParentStart="true" />
 
@@ -84,7 +88,6 @@
                 android:id="@+id/tv_video_collect"
                 android:text="@{video.collectNum}"
                 android:textColor="@color/black"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
             <TextView
@@ -94,7 +97,6 @@
                 android:layout_below="@id/tv_video_collect"
                 android:text="@string/collect_text"
                 android:textSize="12sp"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
 

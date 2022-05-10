@@ -25,6 +25,7 @@ import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.my.MyCollectActivity
+import cn.edu.swu.reptile_android.ui.user.UserDetailActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
@@ -84,7 +85,7 @@ class HomeFragment : Fragment() {
         initFunList()
 
         //初始化今日大盘
-        initLineChart()
+
 
         //初始化userRank
         userRankRv = view.findViewById(R.id.rv_rank_user)
@@ -100,54 +101,16 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    private fun initLineChart() {
-
-//        var xLableCount = 7
-//        var xRangeMaximum = xLableCount - 1
-//
-//        val netLineList: List<Map.Entry<*, *>> = ArrayList()
-//        val netDateList: List<String> = ArrayList()
-//        val lineChart = LineChart(context)
-//        LineChartUtils.initChart(lineChart, true, false, false)
-//
-//        var s: String?
-//        val dateFormat1 = SimpleDateFormat("MM-dd")
-//        val c: Calendar = Calendar.getInstance()
-//        val currentDate: String = dateFormat1.format(c.getTime())
-//        netDateList.add(currentDate)
-//        for (i in 1..6) {
-//            s = formatDatas(i)
-//            netDateList.add(s)
-//        }
-//        Collections.reverse(netDateList)
-//
-//        val lineFloat = floatArrayOf(11f, 15f, 16f, 17f, 16f, 16f, 12f)
-//        for (i in 0 until netDateList.size()) {
-////            netLineList.add(new Entry((float) i, (float) Math.random() * 80));
-//            netLineList.add(
-//                MutableMap.MutableEntry<Any?, Any?>(
-//                    i.toFloat(),
-//                    lineFloat[i]
-//                )
-//            )
-//        }
-//
-//        xLableCount = if (netDateList.size + 3 > 7) 7 else netDateList.size + 3
-//        xRangeMaximum = xLableCount - 1
-//
-//        LineChartUtils.setXAxis(lineChart, xLableCount, netDateList.size, xRangeMaximum)
-//        LineChartUtils.notifyDataSetChanged(lineChart, netLineList, netDateList)
-    }
-
 
     private fun initRefresh() {
-        refresh.setRefreshHeader(ClassicsHeader(context))
+        //自动刷新
+        refresh.autoRefresh()
         refresh.setOnRefreshListener {
             //TODO: refresh data
             //update userRank data
             vm.getUserByFollowerInc()
-
-            refresh.finishRefresh(1000)
+            //update videoRank data
+            vm.getVideoByLikeInc()
         }
     }
 
@@ -209,10 +172,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun initUserRank() {
-
-        vm.getUserByFollowerInc()
-
         val observer = Observer<BaseResponse<List<User>>> {
+            refresh.finishRefresh()
             if (it != null) {
                 if(it.code != 200){
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
@@ -229,16 +190,13 @@ class HomeFragment : Fragment() {
                            .load(user.headImg)
                            .apply(options)
                            .into(view.findViewById(R.id.iv_head))
-                       //粉丝增量
-                       view.findViewById<TextView>(R.id.tv_follower_incremental).text =
-                           DataUtil.numToString(user.followerIncremental)
                    }
                     //点击item
                     userRankAdapter.setOnItemClickListener(object :
                         BaseAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             val user = it.data[position]
-                            val intent = Intent(context, DetailActivity::class.java)
+                            val intent = Intent(context, UserDetailActivity::class.java)
                             intent.putExtra("dest", "user")
                             intent.putExtra("key", "id")
                             intent.putExtra("value", user.id)
@@ -263,9 +221,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun initVideoRank() {
-        vm.getVideoByLikeInc()
-
         val observer = Observer<BaseResponse<List<Video>>> {
+            refresh.finishRefresh()
             if (it != null) {
                 if(it.code != 200){
                     Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG).show()
@@ -276,10 +233,6 @@ class HomeFragment : Fragment() {
                             binding.video = video
                             binding.executePendingBindings()
                         }
-                        //增量
-//                        view.findViewById<TextView>(R.id.tv_video_inc).text =
-//                            DataUtil.numToString(video.likeIncremental)
-
                     }
                     //点击item
                     videoRankAdapter.setOnItemClickListener(object :

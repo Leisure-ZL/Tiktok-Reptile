@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="cn.edu.swu.reptile_android.utils.DataUtil"/>
+
         <variable
             name="video"
             type="cn.edu.swu.reptile_android.model.entity.Video" />
@@ -25,7 +28,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
             android:layout_marginBottom="4dp"
             android:layout_alignParentStart="true" />
 
@@ -48,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_video_like"
                 android:textColor="@color/black"
-                android:text="@{video.likeNum}"/>
+                android:text="@{DataUtil.INSTANCE.strNumToString(video.likeNum)}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_video_comment"
-                android:text="@{video.commentNum}"
+                android:text="@{DataUtil.INSTANCE.strNumToString(video.commentNum)}"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true" />
 
@@ -79,9 +81,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_video_collect"
-                android:text="@{video.collectNum}"
+                android:text="@{DataUtil.INSTANCE.strNumToString(video.collectNum)}"
                 android:textColor="@color/black"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
             <TextView
@@ -91,26 +92,10 @@
                 android:layout_below="@id/tv_video_collect"
                 android:text="@string/collect_text"
                 android:textSize="12sp"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
 
         </RelativeLayout>
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/tv_video_inc"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_alignParentEnd="true" />-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/like_inc"-->
-<!--            android:layout_below="@id/tv_video_inc"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_alignParentEnd="true"/>-->
 
     </RelativeLayout>
 </layout>

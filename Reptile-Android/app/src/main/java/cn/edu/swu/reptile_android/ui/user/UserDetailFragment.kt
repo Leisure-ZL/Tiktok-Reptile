@@ -27,7 +27,6 @@ private const val ARG_PARAM1 = "key"
 private const val ARG_PARAM2 = "value"
 
 class UserDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var key: String? = null
     private var value: String? = null
 
@@ -94,7 +93,7 @@ class UserDetailFragment : Fragment() {
                         startActivity(intent)
                     }
                 }else{
-                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
+                    Toast.makeText(context?.applicationContext, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -127,7 +126,7 @@ class UserDetailFragment : Fragment() {
                         }
                     }
                 }else{
-                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
+                    Toast.makeText(context?.applicationContext, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -141,21 +140,21 @@ class UserDetailFragment : Fragment() {
                     if(resp?.code == 200){
                         val collectBtn: Button? = view?.findViewById(R.id.btn_collect)
                         if(resp.data == "collect"){
-                            Toast.makeText(context, "收藏成功！", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context?.applicationContext, "收藏成功！", Toast.LENGTH_SHORT).show()
                             collectBtn?.setTextColor(android.graphics.Color.BLACK)
                             collectBtn?.text = "取消收藏"
                             collectBtn?.setBackgroundResource(R.drawable.shape_uncollect_btn)
                         }else{
-                            Toast.makeText(context, "取消收藏！", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context?.applicationContext, "取消收藏！", Toast.LENGTH_SHORT).show()
                             collectBtn?.setTextColor(android.graphics.Color.WHITE)
                             collectBtn?.text = "收藏"
                             collectBtn?.setBackgroundResource(R.drawable.shape_collect_btn)
                         }
                     }else{
-                        Toast.makeText(context, "收藏失败！", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context?.applicationContext, "收藏失败！", Toast.LENGTH_SHORT).show()
                     }
                 }else{
-                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
+                    Toast.makeText(context?.applicationContext, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
                         .show()
                 }
             }

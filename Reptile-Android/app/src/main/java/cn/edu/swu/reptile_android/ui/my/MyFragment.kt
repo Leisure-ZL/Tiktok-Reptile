@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.viewmodel.MyViewModel
@@ -34,7 +35,7 @@ class MyFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_my, container, false)
 
-        vm = MyViewModel()
+        vm = ViewModelProvider(this).get(MyViewModel::class.java)
 
         //init setting
         settingBtn = view.findViewById(R.id.iv_setting)

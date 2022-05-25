@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
@@ -38,7 +39,7 @@ class MyCollectActivity : BaseActivity() {
 
         val id = intent.getIntExtra("id", 0)
 
-        val vm = MyViewModel()
+        val vm = ViewModelProvider(this).get(MyViewModel::class.java)
         vm.getCollectList(id)
 
         val observer = Observer<BaseResponse<List<UserCollect>>> {

@@ -15,7 +15,6 @@ class SettingActivity : BaseActivity() {
 
         findViewById<TextView>(R.id.top_bar_title).text = "设置"
 
-
     }
 
     fun clickBack(view: View) {

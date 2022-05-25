@@ -13,10 +13,17 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel() : ViewModel() {
 
-    val username: MutableLiveData<String> = MutableLiveData()
-    val password: MutableLiveData<String> = MutableLiveData()
+    //确保其它类不能修改，保证封装性，Google推荐做法
+    private val _username: MutableLiveData<String> = MutableLiveData()
+    val username: MutableLiveData<String>
+        get() = _username
 
-    val loginInfo: MutableLiveData<BaseResponse<Account>> = MutableLiveData()
+//    val password: MutableLiveData<String> = MutableLiveData()
+
+
+    private val _loginInfo: MutableLiveData<BaseResponse<Account>> = MutableLiveData()
+    val loginInfo: MutableLiveData<BaseResponse<Account>>
+        get() = _loginInfo
 
     private val accountRepo = AccountRepository()
 

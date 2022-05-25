@@ -12,12 +12,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.databinding.FragmentUserDetailBinding
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.DetailViewModel
+import cn.edu.swu.reptile_android.viewmodel.MyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -48,7 +50,8 @@ class UserDetailFragment : Fragment() {
         )
         binding.executePendingBindings()
 
-        val vm = DetailViewModel()
+        val vm = ViewModelProvider(this).get(DetailViewModel::class.java)
+
         //加载User
         vm.getUser(key!!, value!!)
 

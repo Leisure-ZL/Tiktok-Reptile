@@ -15,11 +15,12 @@ import kotlinx.coroutines.launch
 class DetailViewModel : ViewModel() {
     private val userRepo = UserRepository()
 
-
     /**
      * user
      * */
-    val userData: MutableLiveData<BaseResponse<User>> = MutableLiveData()
+    private val _userData: MutableLiveData<BaseResponse<User>> = MutableLiveData()
+    val userData: MutableLiveData<BaseResponse<User>>
+        get() = _userData
 
     fun getUser(key: String, value: String){
         GlobalScope.launch(Dispatchers.Main) {
@@ -32,8 +33,13 @@ class DetailViewModel : ViewModel() {
      * collect user
      * */
 
-    val collectData: MutableLiveData<BaseResponse<String>> = MutableLiveData()
-    val isCollect: MutableLiveData<BaseResponse<Boolean>> = MutableLiveData()
+    private val _collectData: MutableLiveData<BaseResponse<String>> = MutableLiveData()
+    val collectData: MutableLiveData<BaseResponse<String>>
+        get() = _collectData
+
+    private val _isCollect: MutableLiveData<BaseResponse<Boolean>> = MutableLiveData()
+    val isCollect: MutableLiveData<BaseResponse<Boolean>>
+        get() = _isCollect
 
 
     fun collectUser(userId: Int, collectId: Int){

@@ -1,6 +1,7 @@
 package cn.edu.swu.reptile_android.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
@@ -9,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class VideoViewModel {
+class VideoViewModel : ViewModel(){
 
     private val videoRepo = VideoRepository()
 
@@ -22,7 +23,9 @@ class VideoViewModel {
     /**
      * rv data
      * */
-    val rvData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    private val _rvData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    val rvData: MutableLiveData<BaseResponse<List<Video>>>
+        get() = _rvData
 
     fun getVideoByLikeInc() {
         GlobalScope.launch(Dispatchers.Main) {
@@ -66,13 +69,12 @@ class VideoViewModel {
         }
     }
 
-
     /**
      * search data
      * */
-
-
-    val searchData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    private val _searchData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    val searchData: MutableLiveData<BaseResponse<List<Video>>>
+        get() = _searchData
 
     fun loadSearchData(string: String){
         GlobalScope.launch(Dispatchers.Main) {
@@ -80,7 +82,6 @@ class VideoViewModel {
             searchData.value = resp
         }
     }
-
 
 
 }

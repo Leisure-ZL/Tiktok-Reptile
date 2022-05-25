@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
-import cn.edu.swu.reptile_android.ui.base.BaseAdapter
-import cn.edu.swu.reptile_android.ui.base.BaseApplication
+import cn.edu.swu.reptile_android.base.BaseApplication
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
@@ -19,6 +20,7 @@ import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.base.DropdownMenu
 import cn.edu.swu.reptile_android.utils.DataUtil
+import cn.edu.swu.reptile_android.viewmodel.MyViewModel
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -28,7 +30,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 
 class UserFragment : Fragment() {
 
-    private val vm = UserViewModel()
+    lateinit var vm: UserViewModel
 
     private lateinit var refresh: RefreshLayout
     private var cur: Int = 0
@@ -44,6 +46,8 @@ class UserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_user, container, false)
+
+        vm = ViewModelProvider(this).get(UserViewModel::class.java)
 
         //init dropdown
         initDropdownMenu(view)

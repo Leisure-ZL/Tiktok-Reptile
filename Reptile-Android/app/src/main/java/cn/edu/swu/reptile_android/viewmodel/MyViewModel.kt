@@ -15,8 +15,14 @@ class MyViewModel : ViewModel() {
 
     private val userRepo = UserRepository()
 
-    val collectCount: MutableLiveData<BaseResponse<Int>> = MutableLiveData()
-    val collectList: MutableLiveData<BaseResponse<List<UserCollect>>> = MutableLiveData()
+    private val _collectCount: MutableLiveData<BaseResponse<Int>> = MutableLiveData()
+    val collectCount: MutableLiveData<BaseResponse<Int>>
+        get() = _collectCount
+
+    private val _collectList: MutableLiveData<BaseResponse<List<UserCollect>>> = MutableLiveData()
+    val collectList: MutableLiveData<BaseResponse<List<UserCollect>>>
+        get() = _collectList
+
 
     fun getCollectCount(id: Int){
         GlobalScope.launch(Dispatchers.Main) {

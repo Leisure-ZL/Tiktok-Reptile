@@ -23,7 +23,9 @@ class UserViewModel : ViewModel() {
     /**
      * rv data
      * */
-    val rvData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    private val _rvData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    val rvData: MutableLiveData<BaseResponse<List<User>>>
+        get() = _rvData
 
     fun getUserByFollowerInc() {
         GlobalScope.launch(Dispatchers.Main) {
@@ -57,7 +59,9 @@ class UserViewModel : ViewModel() {
      * search data
      * */
 
-    val searchData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    private val _searchData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    val searchData: MutableLiveData<BaseResponse<List<User>>>
+        get() = _searchData
 
     fun loadSearchData(string: String){
         GlobalScope.launch(Dispatchers.Main) {
@@ -65,8 +69,6 @@ class UserViewModel : ViewModel() {
             searchData.value = resp
         }
     }
-
-
 
 
 }

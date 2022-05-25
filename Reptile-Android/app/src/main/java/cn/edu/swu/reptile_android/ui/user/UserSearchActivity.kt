@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
@@ -16,6 +17,7 @@ import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
+import cn.edu.swu.reptile_android.viewmodel.MyViewModel
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -31,7 +33,7 @@ class UserSearchActivity : BaseActivity() {
         val searchBtn: ImageView = findViewById(R.id.iv_search)
         val rv: RecyclerView = findViewById(R.id.rv)
 
-        val vm = UserViewModel()
+        val vm = ViewModelProvider(this).get(UserViewModel::class.java)
 
         var mId = "0"
 

@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
@@ -16,11 +17,10 @@ import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseActivity
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
-import cn.edu.swu.reptile_android.ui.base.BaseApplication
+import cn.edu.swu.reptile_android.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.user.UserDetailActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
-import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
 import com.bumptech.glide.Glide
@@ -59,7 +59,7 @@ class RankActivity : BaseActivity() {
 
     private fun loadVideoRank() {
         findViewById<TextView>(R.id.top_bar_title).text = "热播榜"
-        val vm = VideoViewModel()
+        val vm = ViewModelProvider(this).get(VideoViewModel::class.java)
         vm.getVideoByLikeInc()
 
         val observer = Observer<BaseResponse<List<Video>>> {

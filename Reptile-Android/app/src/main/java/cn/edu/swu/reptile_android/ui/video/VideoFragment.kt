@@ -11,33 +11,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
-import cn.edu.swu.reptile_android.databinding.ItemRvFragmentUserBinding
 import cn.edu.swu.reptile_android.databinding.ItemRvFragmentVideoBinding
-import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
-import cn.edu.swu.reptile_android.ui.base.BaseApplication
+import cn.edu.swu.reptile_android.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.base.DropdownMenu
-import cn.edu.swu.reptile_android.ui.user.UserSearchActivity
 import cn.edu.swu.reptile_android.utils.DataUtil
-import cn.edu.swu.reptile_android.viewmodel.UserViewModel
 import cn.edu.swu.reptile_android.viewmodel.VideoViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 
 class VideoFragment : Fragment() {
 
     val that = this
 
-    private val vm = VideoViewModel()
+    lateinit var vm: VideoViewModel
 
     private lateinit var refresh: RefreshLayout
     private var cur: Int = 0
@@ -53,6 +46,8 @@ class VideoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_video, container, false)
+
+        vm = ViewModelProvider(this).get(VideoViewModel::class.java)
 
         //init dropdown
         initDropdownMenu(view)

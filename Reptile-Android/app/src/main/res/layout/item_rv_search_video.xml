@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="video"
+            type="cn.edu.swu.reptile_android.model.entity.Video" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:padding="8dp"
+        android:background="@drawable/border_underline">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:id="@+id/tv_video_name"
+            android:text="@{video.videoName}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_video_user_name"
+            android:text="@{video.userName}"
+            android:textSize="12sp"
+            android:layout_below="@id/tv_video_name"/>
+
+    </RelativeLayout>
+</layout>

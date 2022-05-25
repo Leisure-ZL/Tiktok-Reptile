@@ -19,6 +19,7 @@ import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
 import cn.edu.swu.reptile_android.ui.main.MainActivity
+import cn.edu.swu.reptile_android.utils.showToast
 import cn.edu.swu.reptile_android.viewmodel.LoginViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
@@ -26,6 +27,8 @@ import com.google.android.material.textfield.TextInputLayout
 class LoginDefaultFragment : Fragment() {
 
     lateinit var vm: LoginViewModel
+
+    private val mContext = activity?.applicationContext
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +49,11 @@ class LoginDefaultFragment : Fragment() {
         val observer = Observer<BaseResponse<Account>>() {
             if (it != null) {
                 if (it.code != 200) {
-                    Toast.makeText(context, "code: ${it.code}, msg: ${it.msg}", Toast.LENGTH_LONG)
-                        .show()
+                        "code: ${it.code}, msg: ${it.msg}".showToast(Toast.LENGTH_LONG)
                 } else {
-                    Toast.makeText(context, "Login success !!", Toast.LENGTH_LONG).show()
+                    if (mContext != null) {
+                        "Login success !!".showToast()
+                    }
                     //保存用户数据
                     val sp =
                         context?.getSharedPreferences("account", AppCompatActivity.MODE_PRIVATE)
@@ -77,7 +81,7 @@ class LoginDefaultFragment : Fragment() {
             val pass = inPass.editText?.text.toString()
 
             if (username == "" || pass == "") {
-                Toast.makeText(context, "请输入用户名/密码！", Toast.LENGTH_LONG).show()
+                "请输入用户名/密码！".showToast(Toast.LENGTH_LONG)
             } else {
                 vm.login(username, pass)
             }
@@ -99,6 +103,5 @@ class LoginDefaultFragment : Fragment() {
 
         return view
     }
-
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="sec_verify_demo_text_size_xs">12sp</dimen>
+	<dimen name="sec_verify_demo_text_size_s">16sp</dimen>
+	<dimen name="sec_verify_demo_text_size_m">20sp</dimen>
+	<dimen name="sec_verify_demo_text_size_l">24sp</dimen>
+	<dimen name="sec_verify_demo_text_size_xl">28sp</dimen>
+
+	<dimen name="sec_verify_demo_common_5">5dp</dimen>
+	<dimen name="sec_verify_demo_common_10">10dp</dimen>
+	<dimen name="sec_verify_demo_common_15">15dp</dimen>
+	<dimen name="sec_verify_demo_common_20">20dp</dimen>
+	<dimen name="sec_verify_demo_common_30">30dp</dimen>
+	<dimen name="sec_verify_demo_common_45">45dp</dimen>
+	<dimen name="sec_verify_demo_common_50">50dp</dimen>
+	<dimen name="sec_verify_demo_common_75">75dp</dimen>
+	<dimen name="sec_verify_demo_common_80">80dp</dimen>
+	<dimen name="sec_verify_demo_common_90">90dp</dimen>
+	<dimen name="sec_verify_demo_common_100">100dp</dimen>
+	<dimen name="sec_verify_demo_common_150">150dp</dimen>
+	<dimen name="sec_verify_demo_common_180">180dp</dimen>
+	<dimen name="sec_verify_demo_common_200">200dp</dimen>
+	<dimen name="sec_verify_demo_common_250">250dp</dimen>
+	<dimen name="sec_verify_demo_common_300">300dp</dimen>
+	<dimen name="sec_verify_demo_common_400">400dp</dimen>
+
+	<!-- switchACC size -->
+	<dimen name="sec_verify_demo_switch_acc_offset_y">355dp</dimen>
+	<!-- loginBtn size -->
+	<dimen name="sec_verify_demo_agreement_offset_bottom_y">70dp</dimen>
+
+	<!-- logo size 1-->
+	<dimen name="sec_verify_demo_logo_offset_right_x_customize">210dp</dimen>
+	<!-- loginBtn size 1-->
+	<dimen name="sec_verify_demo_login_btn_height_customize">40dp</dimen>
+	<dimen name="sec_verify_demo_login_btn_offset_y_customize">210dp</dimen>
+	<!-- agreement size 1-->
+	<dimen name="sec_verify_demo_agreement_offset_y_customize">280dp</dimen>
+	<dimen name="sec_verify_demo_agreement_offset_bottom_y_customize">70dp</dimen>
+	<!-- slogan size 1-->
+	<dimen name="sec_verify_demo_slogan_offset_y_customize">160dp</dimen>
+
+    <dimen name="sec_verify_demo_logo_offset_bottom_y_customize">265dp</dimen>
+    <dimen name="sec_verify_demo_switch_acc_offset_bottom_y_customize">275dp</dimen>
+
+</resources>

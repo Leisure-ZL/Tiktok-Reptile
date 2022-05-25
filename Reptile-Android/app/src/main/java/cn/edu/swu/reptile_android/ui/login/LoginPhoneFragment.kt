@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
@@ -48,7 +49,7 @@ class LoginPhoneFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login_phone, container, false)
 
-        val vm = LoginViewModel()
+        val vm = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         val etPhone = view.findViewById<TextInputEditText>(R.id.et_phone)
         val etVerity = view.findViewById<TextInputEditText>(R.id.et_verity)

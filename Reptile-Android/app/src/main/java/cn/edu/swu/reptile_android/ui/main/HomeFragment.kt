@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.swu.reptile_android.R
@@ -22,18 +23,16 @@ import cn.edu.swu.reptile_android.model.entity.HomeFun
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
 import cn.edu.swu.reptile_android.ui.base.BaseAdapter
-import cn.edu.swu.reptile_android.ui.base.BaseApplication
+import cn.edu.swu.reptile_android.base.BaseApplication
 import cn.edu.swu.reptile_android.ui.base.BindingAdapter
 import cn.edu.swu.reptile_android.ui.my.MyCollectActivity
 import cn.edu.swu.reptile_android.ui.user.UserDetailActivity
 import cn.edu.swu.reptile_android.ui.video.VideoDetailActivity
-import cn.edu.swu.reptile_android.utils.DataUtil
 import cn.edu.swu.reptile_android.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
@@ -43,7 +42,7 @@ import com.youth.banner.indicator.CircleIndicator
 
 class HomeFragment : Fragment() {
 
-    private val vm = HomeViewModel()
+    private lateinit var vm: HomeViewModel
 
     val that = this
 
@@ -71,6 +70,8 @@ class HomeFragment : Fragment() {
 
       //  val view = dataBinding.root
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        vm = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         //初始化Refresh
         refresh = view.findViewById<View>(R.id.refreshLayout) as RefreshLayout

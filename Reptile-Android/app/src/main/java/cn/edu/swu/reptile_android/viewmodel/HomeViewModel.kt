@@ -29,7 +29,9 @@ class HomeViewModel : ViewModel() {
     * */
     private val userRepo = UserRepository()
 
-    val userData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    private val _userData: MutableLiveData<BaseResponse<List<User>>> = MutableLiveData()
+    val userData: MutableLiveData<BaseResponse<List<User>>>
+        get() = _userData
 
     fun getUserByFollowerInc() {
         GlobalScope.launch(Dispatchers.Main) {
@@ -43,7 +45,9 @@ class HomeViewModel : ViewModel() {
      * */
     private val videoRepo = VideoRepository()
 
-    val videoData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    private val _videoData: MutableLiveData<BaseResponse<List<Video>>> = MutableLiveData()
+    val videoData: MutableLiveData<BaseResponse<List<Video>>>
+        get() = _videoData
 
     fun getVideoByLikeInc() {
         GlobalScope.launch(Dispatchers.Main) {
@@ -51,10 +55,5 @@ class HomeViewModel : ViewModel() {
             videoData.value = resp
         }
     }
-
-
-
-
-
 
 }

@@ -3,6 +3,7 @@ package cn.edu.swu.reptile_android.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.repository.UserRepository
@@ -28,28 +29,28 @@ class UserViewModel : ViewModel() {
         get() = _rvData
 
     fun getUserByFollowerInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByFollowerInc(100)
             rvData.value = resp
         }
     }
 
     fun getUserByLikeInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByLikeInc(100)
             rvData.value = resp
         }
     }
 
     fun getUserByFollower() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByFollower(100)
             rvData.value = resp
         }
     }
 
     fun getUserByLike() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByLike(100)
             rvData.value = resp
         }
@@ -64,7 +65,7 @@ class UserViewModel : ViewModel() {
         get() = _searchData
 
     fun loadSearchData(string: String){
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByVague(string)
             searchData.value = resp
         }

@@ -3,6 +3,7 @@ package cn.edu.swu.reptile_android.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
 import cn.edu.swu.reptile_android.repository.AccountRepository
@@ -10,6 +11,7 @@ import cn.edu.swu.reptile_android.utils.EncryptionUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginViewModel() : ViewModel() {
 
@@ -28,7 +30,7 @@ class LoginViewModel() : ViewModel() {
     private val accountRepo = AccountRepository()
 
     fun login(username: String, pass: String) {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = accountRepo.login(
                 username, pass,
                 checksum(username, pass)

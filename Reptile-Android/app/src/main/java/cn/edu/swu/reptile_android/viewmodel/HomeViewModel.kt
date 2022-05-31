@@ -2,6 +2,7 @@ package cn.edu.swu.reptile_android.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.edu.swu.reptile_android.R
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.HomeFun
@@ -34,7 +35,7 @@ class HomeViewModel : ViewModel() {
         get() = _userData
 
     fun getUserByFollowerInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getUserByFollowerInc(5) //默认获取5个
             userData.value = resp
         }
@@ -50,7 +51,7 @@ class HomeViewModel : ViewModel() {
         get() = _videoData
 
     fun getVideoByLikeInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByLikeInc(5)
             videoData.value = resp
         }

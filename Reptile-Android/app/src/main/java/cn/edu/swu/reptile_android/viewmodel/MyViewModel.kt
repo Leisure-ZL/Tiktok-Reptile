@@ -2,6 +2,7 @@ package cn.edu.swu.reptile_android.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.Account
 import cn.edu.swu.reptile_android.model.entity.User
@@ -25,7 +26,7 @@ class MyViewModel : ViewModel() {
 
 
     fun getCollectCount(id: Int){
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getCollectCount(id)
             collectCount.value = resp
         }
@@ -33,7 +34,7 @@ class MyViewModel : ViewModel() {
 
 
     fun getCollectList(id: Int){
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = userRepo.getCollectList(id)
             collectList.value = resp
         }

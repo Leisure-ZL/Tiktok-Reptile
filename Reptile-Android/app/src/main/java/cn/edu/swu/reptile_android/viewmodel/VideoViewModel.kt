@@ -2,6 +2,7 @@ package cn.edu.swu.reptile_android.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.edu.swu.reptile_android.base.BaseResponse
 import cn.edu.swu.reptile_android.model.entity.User
 import cn.edu.swu.reptile_android.model.entity.Video
@@ -28,42 +29,42 @@ class VideoViewModel : ViewModel(){
         get() = _rvData
 
     fun getVideoByLikeInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByLikeInc(100)
             rvData.value = resp
         }
     }
 
     fun getVideoByCommentInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByCommentInc(100)
             rvData.value = resp
         }
     }
 
     fun getVideoByCollectInc() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByCollectInc(100)
             rvData.value = resp
         }
     }
 
     fun getVideoByLike() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByLike(100)
             rvData.value = resp
         }
     }
 
     fun getVideoByComment() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByComment(100)
             rvData.value = resp
         }
     }
 
     fun getVideoByCollect() {
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByCollect(100)
             rvData.value = resp
         }
@@ -77,7 +78,7 @@ class VideoViewModel : ViewModel(){
         get() = _searchData
 
     fun loadSearchData(string: String){
-        GlobalScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Main) {
             val resp = videoRepo.getVideoByVague(string)
             searchData.value = resp
         }

@@ -10,6 +10,7 @@ import cn.edu.swu.reptile_android.net.NetApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class AccountRepository {
@@ -19,9 +20,11 @@ class AccountRepository {
 
 
     suspend fun login(username: String, password: String, checksum: String): BaseResponse<Account> {
-        val account = Account(0, username, password)
-        val req = BaseRequest(checksum, account)
-        return service.login(req)
+        return withContext(Dispatchers.IO){
+            val account = Account(0, username, password)
+            val req = BaseRequest(checksum, account)
+            service.login(req)
+        }
     }
 
 
